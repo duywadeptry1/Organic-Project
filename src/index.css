@@ -1,0 +1,24 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+html, body {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  background-color: #FBF9F5;
+  color: #1F2937;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@theme {
+  --color-water: #4F9D9D;
+  --color-grass: #16A34A;
+  --color-warning: #F59E0B;
+  --color-theme-bg: #FBF9F5;
+  --color-error: #EF4444;
+}
+
+/* Custom smooth styling */
+::selection {
+  background-color: #DCFCE7;
+  color: #166534;
+}

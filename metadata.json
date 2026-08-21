@@ -1,0 +1,8 @@
+{
+  "name": "Remix OrganicProduct",
+  "description": "Imported from GitHub: duywadeptry1/OrganicProduct",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
