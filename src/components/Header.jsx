@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../slices/authSlice';
-import Banner1 from '../assets/image/Thử lại.png';
-
 function Header() {
   const { cartItems } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.auth);
@@ -24,10 +22,7 @@ function Header() {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <header
-      className="sticky top-0 z-50 shadow-md bg-cover bg-center bg-no-repeat transition-all"
-      style={{ backgroundImage: `url(${Banner1})`, backgroundColor: '#FDFBF7' }}
-    >
+    <header className="sticky top-0 z-50 bg-[#FDFBF7]/95 backdrop-blur-md shadow-xs border-b border-stone-200/70 transition-all">
       <div className="backdrop-blur-[1px] bg-white/40 border-b border-stone-200/60">
         <div className="container mx-auto px-4 sm:px-6 h-18 flex items-center justify-between gap-4">
           
