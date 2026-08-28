@@ -6,6 +6,8 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       query: (params = {}) => {
         const queryParams = new URLSearchParams();
         if (params.pageNumber) queryParams.append('pageNumber', params.pageNumber);
+        if (params.pageSize) queryParams.append('pageSize', params.pageSize);
+        if (params.limit) queryParams.append('limit', params.limit);
         if (params.category && params.category !== 'All') queryParams.append('category', params.category);
         if (params.keyword) queryParams.append('keyword', params.keyword);
         if (params.sort) queryParams.append('sort', params.sort);
@@ -27,9 +29,19 @@ export const productsApiSlice = apiSlice.injectEndpoints({
     }),
 
     createProduct: builder.mutation({
-      query: () => ({
+      query: (data) => ({
         url: '/api/products',
         method: 'POST',
+        body: data || {},
+      }),
+      invalidatesTags: ['Product'],
+    }),
+
+    bulkCreateProducts: builder.mutation({
+      query: (data) => ({
+        url: '/api/products/bulk',
+        method: 'POST',
+        body: data,
       }),
       invalidatesTags: ['Product'],
     }),
@@ -65,6 +77,7 @@ export const {
   useGetProductsQuery,
   useGetProductDetailsQuery,
   useCreateProductMutation,
+  useBulkCreateProductsMutation,
   useUpdateProductMutation,
   useUploadProductImageMutation,
   useDeleteProductMutation,

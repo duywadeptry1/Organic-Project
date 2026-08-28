@@ -27,9 +27,16 @@ export const registerUser = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
 
+    if (!name || !email || !password) {
+      res.status(400);
+      throw new Error('Please fill in all fields');
+    }
+
+    const normalizedEmail = email.toLowerCase().trim();
+
     // 1. Try MongoDB first
     try {
-      const userExists = await User.findOne({ email });
+      const userExists = await User.findOne({ email: normalizedEmail });
       if (userExists) {
         res.status(400);
         throw new Error('User already exists');
@@ -37,7 +44,7 @@ export const registerUser = async (req, res, next) => {
 
       const user = await User.create({
         name,
-        email,
+        email: normalizedEmail,
         password,
       });
 
@@ -54,11 +61,11 @@ export const registerUser = async (req, res, next) => {
       if (dbErr.message === 'User already exists') {
         throw dbErr;
       }
-      // Fallback
+      // MongoDB not connected or failed, fallback to memory
     }
 
     // In-memory registration
-    const existing = memoryUsers.find((u) => u.email.toLowerCase() === email.toLowerCase());
+    const existing = memoryUsers.find((u) => u.email.toLowerCase() === normalizedEmail);
     if (existing) {
       res.status(400);
       throw new Error('User already exists');
@@ -67,7 +74,7 @@ export const registerUser = async (req, res, next) => {
     const newUser = {
       _id: 'user-' + Date.now(),
       name,
-      email,
+      email: normalizedEmail,
       password,
       role: 'user',
     };
@@ -91,55 +98,62 @@ export const authUser = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
-    // 1. Try DB
+    if (!email || !password) {
+      res.status(400);
+      throw new Error('Please provide email and password');
+    }
+
+    const normalizedEmail = email.toLowerCase().trim();
+
+    // 1. Try DB validation
+    let dbChecked = false;
     try {
-      const user = await User.findOne({ email });
-      if (user && (await user.matchPassword(password))) {
-        return res.json({
-          _id: user._id,
-          name: user.name,
-          email: user.email,
-          role: user.role,
-          token: generateToken(user._id),
-        });
+      const user = await User.findOne({ email: normalizedEmail });
+      dbChecked = true;
+      if (user) {
+        const isMatch = await user.matchPassword(password);
+        if (isMatch) {
+          return res.json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+            token: generateToken(user._id),
+          });
+        } else {
+          // User exists in DB but password does not match
+          res.status(401);
+          throw new Error('Please enter the right account');
+        }
       }
     } catch (dbErr) {
-      // Fall through to memory
+      if (dbErr.message === 'Please enter the right account') {
+        throw dbErr;
+      }
+      // DB query error or DB offline, fall through to memory check
     }
 
-    // 2. Memory / Demo Fallback
-    const memUser = memoryUsers.find((u) => u.email?.toLowerCase() === email?.toLowerCase());
-    if (memUser && (memUser.password === password || password === 'password123' || password === 'admin123')) {
-      return res.json({
-        _id: memUser._id,
-        name: memUser.name,
-        email: memUser.email,
-        role: memUser.role,
-        token: generateToken(memUser._id),
-      });
+    // 2. Memory check (registered in memory or seed demo accounts)
+    const memUser = memoryUsers.find((u) => u.email?.toLowerCase() === normalizedEmail);
+    if (memUser) {
+      if (memUser.password === password) {
+        return res.json({
+          _id: memUser._id,
+          name: memUser.name,
+          email: memUser.email,
+          role: memUser.role,
+          token: generateToken(memUser._id),
+        });
+      } else {
+        // Password mismatch in memory
+        res.status(401);
+        throw new Error('Please enter the right account');
+      }
     }
 
-    // Auto-create/demo login for any valid email during preview
-    if (email && password) {
-      const autoUser = {
-        _id: 'user-' + Date.now(),
-        name: email.split('@')[0],
-        email,
-        password,
-        role: email.includes('admin') ? 'admin' : 'user',
-      };
-      memoryUsers.push(autoUser);
-      return res.json({
-        _id: autoUser._id,
-        name: autoUser.name,
-        email: autoUser.email,
-        role: autoUser.role,
-        token: generateToken(autoUser._id),
-      });
-    }
-
+    // If user was not found in DB or memory storage, reject with notification message
     res.status(401);
-    throw new Error('Invalid email or password');
+    throw new Error('Please enter the right account');
   } catch (error) {
     next(error);
   }

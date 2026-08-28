@@ -3,6 +3,7 @@ import {
   getProducts, 
   getProductById, 
   createProduct, 
+  bulkCreateProducts,
   updateProduct, 
   deleteProduct 
 } from '../controllers/productController.js';
@@ -13,6 +14,9 @@ const router = express.Router();
 router.route('/')
   .get(getProducts)
   .post(protect, admin, createProduct); 
+
+router.route('/bulk')
+  .post(protect, admin, bulkCreateProducts);
 
 router.route('/:id')
   .get(getProductById)

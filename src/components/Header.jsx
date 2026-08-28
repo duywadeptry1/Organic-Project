@@ -32,7 +32,7 @@ function Header() {
               to="/"
               className="flex items-center text-2xl sm:text-3xl font-black text-green-700 tracking-tight hover:opacity-90 transition-opacity"
             >
-              ORGANI<span className="text-stone-900">.</span>
+              ORGANIc<span className="text-stone-900">.</span>
             </Link>
 
             {/* Desktop Navigation Links */}
