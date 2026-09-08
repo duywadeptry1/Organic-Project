@@ -45,15 +45,15 @@ function ShopPage() {
   const totalPages = data?.pages || 1;
 
   return (
-    <div className="bg-[#FDFBF7] min-h-screen py-10">
+    <div className="bg-[#FDFBF7] dark:bg-stone-950 min-h-screen py-10">
       <div className="container mx-auto px-4 sm:px-6">
         
         {/* Page Header / Breadcrumb */}
         <div className="mb-8">
-          <h1 className="text-3xl sm:text-4xl font-black text-stone-900 tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-black text-stone-900 dark:text-stone-100 tracking-tight">
             Organic Marketplace
           </h1>
-          <p className="text-stone-500 text-sm mt-1">
+          <p className="text-stone-500 dark:text-stone-400 text-sm mt-1">
             Carefully curated fresh, pesticide-free harvest and wholesome pantry staples.
           </p>
         </div>
@@ -62,10 +62,10 @@ function ShopPage() {
 
           {/* Sidebar Filters */}
           <aside className="w-full lg:w-64 shrink-0">
-            <div className="bg-white p-5 rounded-2xl shadow-xs border border-stone-200/80 sticky top-24">
-              <h2 className="text-base font-bold text-stone-900 mb-3 pb-2 border-b border-stone-100 flex items-center justify-between">
+            <div className="bg-white dark:bg-stone-900 p-5 rounded-2xl shadow-xs border border-stone-200/80 dark:border-stone-800 sticky top-24">
+              <h2 className="text-base font-bold text-stone-900 dark:text-stone-100 mb-3 pb-2 border-b border-stone-100 dark:border-stone-800 flex items-center justify-between">
                 <span>Categories</span>
-                <span className="text-xs font-semibold text-green-700 bg-green-50 px-2 py-0.5 rounded-full">
+                <span className="text-xs font-semibold text-green-700 dark:text-green-300 bg-green-50 dark:bg-green-950/60 px-2 py-0.5 rounded-full">
                   All Natural
                 </span>
               </h2>
@@ -77,7 +77,7 @@ function ShopPage() {
                     className={`w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center justify-between ${
                       activeCategory === 'All'
                         ? 'bg-green-600 text-white shadow-xs'
-                        : 'text-stone-700 hover:bg-stone-100 hover:text-stone-900'
+                        : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-stone-100'
                     }`}
                   >
                     <span>All Products</span>
@@ -94,7 +94,7 @@ function ShopPage() {
                       className={`w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center justify-between ${
                         activeCategory.toLowerCase() === cat.name.toLowerCase()
                           ? 'bg-green-600 text-white shadow-xs'
-                          : 'text-stone-700 hover:bg-stone-100 hover:text-stone-900'
+                          : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-stone-100'
                       }`}
                     >
                       <span>{cat.name}</span>
@@ -107,8 +107,8 @@ function ShopPage() {
               </ul>
 
               {/* Quality Guarantee Note */}
-              <div className="mt-6 pt-5 border-t border-stone-100 text-xs text-stone-500">
-                <p className="font-bold text-stone-700 mb-1">🌿 Farm Verified</p>
+              <div className="mt-6 pt-5 border-t border-stone-100 dark:border-stone-800 text-xs text-stone-500 dark:text-stone-400">
+                <p className="font-bold text-stone-700 dark:text-stone-200 mb-1">🌿 Farm Verified</p>
                 <p>All items meet stringent non-GMO and ethical agricultural certifications.</p>
               </div>
             </div>
@@ -118,7 +118,7 @@ function ShopPage() {
           <main className="flex-1 w-full">
             
             {/* Search and Sort Toolbar */}
-            <div className="bg-white p-4 rounded-2xl shadow-xs border border-stone-200/80 mb-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="bg-white dark:bg-stone-900 p-4 rounded-2xl shadow-xs border border-stone-200/80 dark:border-stone-800 mb-6 flex flex-col sm:flex-row items-center justify-between gap-4">
               
               {/* Search input with clear button */}
               <div className="relative w-full sm:w-80">
@@ -135,12 +135,12 @@ function ShopPage() {
                     setSearchQuery(e.target.value);
                     setCurrentPage(1);
                   }}
-                  className="w-full pl-9 pr-8 py-2 text-sm bg-stone-50 border border-stone-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all text-stone-800"
+                  className="w-full pl-9 pr-8 py-2 text-sm bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-xl focus:bg-white dark:focus:bg-stone-850 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all text-stone-800 dark:text-stone-100"
                 />
                 {searchQuery && (
                   <button
                     onClick={() => setSearchQuery('')}
-                    className="absolute inset-y-0 right-2.5 flex items-center text-stone-400 hover:text-stone-600"
+                    className="absolute inset-y-0 right-2.5 flex items-center text-stone-400 hover:text-stone-600 dark:hover:text-stone-200"
                   >
                     ✕
                   </button>
@@ -149,11 +149,11 @@ function ShopPage() {
 
               {/* Sort dropdown */}
               <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
-                <span className="text-xs font-semibold text-stone-500 shrink-0">Sort by:</span>
+                <span className="text-xs font-semibold text-stone-500 dark:text-stone-400 shrink-0">Sort by:</span>
                 <select
                   value={sortOption}
                   onChange={(e) => setSortOption(e.target.value)}
-                  className="py-2 px-3 text-sm bg-stone-50 border border-stone-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 text-stone-800 font-medium cursor-pointer"
+                  className="py-2 px-3 text-sm bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-xl focus:bg-white dark:focus:bg-stone-850 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 text-stone-800 dark:text-stone-100 font-medium cursor-pointer"
                 >
                   <option value="newest">Newest Arrivals</option>
                   <option value="price_asc">Price: Low to High</option>
@@ -169,19 +169,19 @@ function ShopPage() {
                 <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600"></div>
               </div>
             ) : error ? (
-              <div className="bg-red-50 border border-red-200 text-red-700 p-6 rounded-2xl text-center">
+              <div className="bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/60 text-red-700 dark:text-red-300 p-6 rounded-2xl text-center">
                 <p className="font-bold">Failed to load products</p>
                 <p className="text-sm mt-1">{error?.data?.message || error.error || 'Server error'}</p>
               </div>
             ) : products.length === 0 ? (
-              <div className="bg-white rounded-2xl border border-stone-200/80 p-12 text-center">
-                <div className="w-16 h-16 bg-stone-100 text-stone-400 rounded-full flex items-center justify-center mx-auto mb-3">
+              <div className="bg-white dark:bg-stone-900 rounded-2xl border border-stone-200/80 dark:border-stone-800 p-12 text-center">
+                <div className="w-16 h-16 bg-stone-100 dark:bg-stone-800 text-stone-400 rounded-full flex items-center justify-center mx-auto mb-3">
                   <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <h3 className="font-bold text-stone-800 text-lg">No Products Found</h3>
-                <p className="text-stone-500 text-sm mt-1 max-w-sm mx-auto">
+                <h3 className="font-bold text-stone-800 dark:text-stone-100 text-lg">No Products Found</h3>
+                <p className="text-stone-500 dark:text-stone-400 text-sm mt-1 max-w-sm mx-auto">
                   Try adjusting your search keyword or switching the category filter.
                 </p>
                 <button
@@ -209,17 +209,17 @@ function ShopPage() {
                     <button
                       disabled={currentPage === 1}
                       onClick={() => setCurrentPage((prev) => prev - 1)}
-                      className="px-4 py-2 bg-white border border-stone-200 rounded-xl text-sm font-semibold text-stone-700 hover:bg-stone-50 disabled:opacity-40 disabled:cursor-not-allowed transition"
+                      className="px-4 py-2 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-xl text-sm font-semibold text-stone-700 dark:text-stone-200 hover:bg-stone-50 dark:hover:bg-stone-800 disabled:opacity-40 disabled:cursor-not-allowed transition"
                     >
                       &larr; Previous
                     </button>
-                    <span className="text-sm font-semibold text-stone-600 px-3">
+                    <span className="text-sm font-semibold text-stone-600 dark:text-stone-400 px-3">
                       Page {currentPage} of {totalPages}
                     </span>
                     <button
                       disabled={currentPage === totalPages}
                       onClick={() => setCurrentPage((prev) => prev + 1)}
-                      className="px-4 py-2 bg-white border border-stone-200 rounded-xl text-sm font-semibold text-stone-700 hover:bg-stone-50 disabled:opacity-40 disabled:cursor-not-allowed transition"
+                      className="px-4 py-2 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-xl text-sm font-semibold text-stone-700 dark:text-stone-200 hover:bg-stone-50 dark:hover:bg-stone-800 disabled:opacity-40 disabled:cursor-not-allowed transition"
                     >
                       Next &rarr;
                     </button>

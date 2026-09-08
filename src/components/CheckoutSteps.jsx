@@ -22,13 +22,13 @@ function CheckoutSteps({ step1, step2, step3, step4 }) {
                   {s.num}
                 </Link>
               ) : (
-                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-stone-200 text-stone-500 font-bold text-xs">
+                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-stone-200 dark:bg-stone-800 text-stone-500 dark:text-stone-400 font-bold text-xs">
                   {s.num}
                 </div>
               )}
               <span
                 className={`mt-1.5 text-xs font-semibold text-center ${
-                  s.active ? 'text-green-800 font-bold' : 'text-stone-400'
+                  s.active ? 'text-green-800 dark:text-green-400 font-bold' : 'text-stone-400 dark:text-stone-500'
                 }`}
               >
                 {s.name}
@@ -38,7 +38,7 @@ function CheckoutSteps({ step1, step2, step3, step4 }) {
             {idx < steps.length - 1 && (
               <div
                 className={`hidden sm:block absolute top-4 left-1/2 w-full h-0.5 -z-10 ${
-                  steps[idx + 1].active ? 'bg-green-600' : 'bg-stone-200'
+                  steps[idx + 1].active ? 'bg-green-600' : 'bg-stone-200 dark:bg-stone-800'
                 }`}
               />
             )}

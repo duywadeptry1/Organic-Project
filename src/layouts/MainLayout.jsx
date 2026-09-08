@@ -3,7 +3,7 @@ import Header from '../components/Header';
 
 function MainLayout() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#FBF9F5] text-stone-800 selection:bg-green-100 selection:text-green-900">
+    <div className="min-h-screen flex flex-col bg-[#FBF9F5] dark:bg-stone-950 text-stone-800 dark:text-stone-100 selection:bg-green-100 dark:selection:bg-green-950/80 selection:text-green-900 dark:selection:text-green-300 transition-colors duration-200">
       <Header />
       <main className="flex-1">
         <Outlet />

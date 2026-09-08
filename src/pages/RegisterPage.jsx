@@ -60,17 +60,17 @@ function RegisterPage() {
   const displayedError = clientError || error?.data?.message || (error?.error ? String(error.error) : null);
 
   return (
-    <div className="bg-[#FDFBF7] min-h-[85vh] flex items-center justify-center py-12 px-4 sm:px-6">
-      <div className="w-full max-w-md bg-white p-8 sm:p-10 rounded-3xl shadow-xs border border-stone-200/80">
+    <div className="bg-[#FDFBF7] dark:bg-stone-950 min-h-[85vh] flex items-center justify-center py-12 px-4 sm:px-6 transition-colors duration-200">
+      <div className="w-full max-w-md bg-white dark:bg-stone-900 p-8 sm:p-10 rounded-3xl shadow-xs border border-stone-200/80 dark:border-stone-800 transition-colors duration-200">
         
         <div className="text-center mb-8">
-          <span className="text-xs font-bold text-green-700 uppercase tracking-widest bg-green-50 px-3 py-1 rounded-full">
+          <span className="text-xs font-bold text-green-700 dark:text-green-400 uppercase tracking-widest bg-green-50 dark:bg-green-950/50 px-3 py-1 rounded-full border border-green-200/30 dark:border-green-800/40">
             Join the Community
           </span>
-          <h1 className="text-2xl sm:text-3xl font-black text-stone-900 tracking-tight mt-3">
+          <h1 className="text-2xl sm:text-3xl font-black text-stone-900 dark:text-stone-50 tracking-tight mt-3">
             Create Your Account
           </h1>
-          <p className="text-xs text-stone-500 mt-1">
+          <p className="text-xs text-stone-500 dark:text-stone-400 mt-1">
             Shop farm-to-table organic produce delivered fresh directly to your door.
           </p>
         </div>
@@ -79,23 +79,23 @@ function RegisterPage() {
           <div
             id="register-error-alert"
             role="alert"
-            className="bg-red-50 border border-red-200/80 text-red-800 px-4 py-3.5 rounded-2xl mb-6 flex items-start gap-3 shadow-xs animate-in fade-in duration-200"
+            className="bg-red-50 dark:bg-red-950/40 border border-red-200/80 dark:border-red-900/60 text-red-800 dark:text-red-300 px-4 py-3.5 rounded-2xl mb-6 flex items-start gap-3 shadow-xs animate-in fade-in duration-200"
           >
-            <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
+            <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 shrink-0 mt-0.5" />
             <div className="text-xs">
-              <p className="font-bold text-red-900">Registration Error</p>
-              <p className="text-red-700 mt-0.5">{displayedError}</p>
+              <p className="font-bold text-red-900 dark:text-red-200">Registration Error</p>
+              <p className="text-red-700 dark:text-red-400 mt-0.5">{displayedError}</p>
             </div>
           </div>
         )}
 
         <form onSubmit={submitHandler} className="space-y-4">
           <div>
-            <label className="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">
+            <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 uppercase tracking-wider mb-1.5">
               Full Name
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400 dark:text-stone-500">
                 <UserIcon className="w-4 h-4" />
               </div>
               <input
@@ -106,18 +106,18 @@ function RegisterPage() {
                   setName(e.target.value);
                   if (clientError) setClientError('');
                 }}
-                className="w-full pl-10 pr-4 py-3 text-sm bg-stone-50 border border-stone-200 rounded-2xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 text-stone-800 transition"
+                className="w-full pl-10 pr-4 py-3 text-sm bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-2xl focus:bg-white dark:focus:bg-stone-800 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 text-stone-800 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 transition"
                 required
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">
+            <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 uppercase tracking-wider mb-1.5">
               Email Address
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400 dark:text-stone-500">
                 <Mail className="w-4 h-4" />
               </div>
               <input
@@ -128,18 +128,18 @@ function RegisterPage() {
                   setEmail(e.target.value);
                   if (clientError) setClientError('');
                 }}
-                className="w-full pl-10 pr-4 py-3 text-sm bg-stone-50 border border-stone-200 rounded-2xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 text-stone-800 transition"
+                className="w-full pl-10 pr-4 py-3 text-sm bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-2xl focus:bg-white dark:focus:bg-stone-800 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 text-stone-800 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 transition"
                 required
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">
+            <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 uppercase tracking-wider mb-1.5">
               Password
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400 dark:text-stone-500">
                 <Lock className="w-4 h-4" />
               </div>
               <input
@@ -150,18 +150,18 @@ function RegisterPage() {
                   setPassword(e.target.value);
                   if (clientError) setClientError('');
                 }}
-                className="w-full pl-10 pr-4 py-3 text-sm bg-stone-50 border border-stone-200 rounded-2xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 text-stone-800 transition"
+                className="w-full pl-10 pr-4 py-3 text-sm bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-2xl focus:bg-white dark:focus:bg-stone-800 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 text-stone-800 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 transition"
                 required
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">
+            <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 uppercase tracking-wider mb-1.5">
               Confirm Password
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400 dark:text-stone-500">
                 <Lock className="w-4 h-4" />
               </div>
               <input
@@ -172,7 +172,7 @@ function RegisterPage() {
                   setConfirmPassword(e.target.value);
                   if (clientError) setClientError('');
                 }}
-                className="w-full pl-10 pr-4 py-3 text-sm bg-stone-50 border border-stone-200 rounded-2xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 text-stone-800 transition"
+                className="w-full pl-10 pr-4 py-3 text-sm bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-2xl focus:bg-white dark:focus:bg-stone-800 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 text-stone-800 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 transition"
                 required
               />
             </div>
@@ -188,11 +188,11 @@ function RegisterPage() {
           </button>
         </form>
 
-        <div className="mt-8 pt-6 border-t border-stone-100 text-center text-stone-500 text-xs">
+        <div className="mt-8 pt-6 border-t border-stone-100 dark:border-stone-800 text-center text-stone-500 dark:text-stone-400 text-xs">
           Already have an account?{' '}
           <Link
             to={redirect ? `/login?redirect=${redirect}` : '/login'}
-            className="text-green-700 hover:text-green-800 font-bold ml-1 hover:underline"
+            className="text-green-700 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300 font-bold ml-1 hover:underline"
           >
             Sign In Here
           </Link>

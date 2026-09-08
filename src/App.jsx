@@ -19,6 +19,9 @@ import OrderListPage from './pages/OrderListPage';
 import AdminRoute from './components/AdminRoute';
 import ProductListPage from './pages/ProductListPage';
 import ProductEditPage from './pages/ProductEditPage';
+import FarmDashboardPage from './pages/FarmDashboardPage';
+import AdminWithdrawalsPage from './pages/AdminWithdrawalsPage';
+import FarmRoute from './components/FarmRoute';
 
 function App() {
   return (
@@ -40,6 +43,10 @@ function App() {
         <Route path="order/:id" element={<ProtectedRoute><OrderDetailsPage /></ProtectedRoute>} />
         <Route path="profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
 
+        {/* Farm Partner Portal Routes */}
+        <Route path="farm" element={<FarmRoute><FarmDashboardPage /></FarmRoute>} />
+        <Route path="farm/dashboard" element={<FarmRoute><FarmDashboardPage /></FarmRoute>} />
+
         <Route path="*" element={<NotFoundPage />} />
       </Route>
 
@@ -49,6 +56,7 @@ function App() {
         <Route path="" element={<AdminRoute />}>
           <Route path="orderlist" element={<OrderListPage />} />
           <Route path="productlist" element={<ProductListPage />} />
+          <Route path="withdrawals" element={<AdminWithdrawalsPage />} />
           <Route path="product/:id/edit" element={<ProductEditPage />} />
         </Route>
       </Route>

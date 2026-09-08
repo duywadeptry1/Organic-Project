@@ -55,7 +55,7 @@ function PlaceOrderPage() {
   };
 
   return (
-    <div className="bg-[#FDFBF7] min-h-screen py-10">
+    <div className="bg-[#FDFBF7] dark:bg-stone-950 min-h-screen py-10 text-stone-800 dark:text-stone-100 transition-colors duration-200">
       <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
         <CheckoutSteps step1 step2 step3 step4 />
 
@@ -65,65 +65,80 @@ function PlaceOrderPage() {
           <div className="lg:col-span-2 space-y-6">
             
             {/* Delivery Address Review */}
-            <div className="bg-white p-6 rounded-3xl shadow-xs border border-stone-200/80">
+            <div className="bg-white dark:bg-stone-900 p-6 rounded-3xl shadow-xs border border-stone-200/80 dark:border-stone-800 transition-colors duration-200">
               <div className="flex items-center justify-between mb-3">
-                <h2 className="text-lg font-bold text-stone-900 flex items-center gap-2">
+                <h2 className="text-lg font-bold text-stone-900 dark:text-stone-100 flex items-center gap-2">
                   <span>📍</span> Delivery Address
                 </h2>
-                <Link to="/shipping" className="text-xs font-bold text-green-700 hover:text-green-800">
+                <Link to="/shipping" className="text-xs font-bold text-green-700 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300">
                   Edit
                 </Link>
               </div>
-              <p className="text-stone-600 text-sm">
+              <p className="text-stone-600 dark:text-stone-300 text-sm">
                 {cart.shippingAddress.address}, {cart.shippingAddress.city},{' '}
                 {cart.shippingAddress.postalCode}, {cart.shippingAddress.country}
               </p>
             </div>
 
             {/* Payment Method Review */}
-            <div className="bg-white p-6 rounded-3xl shadow-xs border border-stone-200/80">
+            <div className="bg-white dark:bg-stone-900 p-6 rounded-3xl shadow-xs border border-stone-200/80 dark:border-stone-800 transition-colors duration-200">
               <div className="flex items-center justify-between mb-3">
-                <h2 className="text-lg font-bold text-stone-900 flex items-center gap-2">
-                  <span>💳</span> Payment Gateway
+                <h2 className="text-lg font-bold text-stone-900 dark:text-stone-100 flex items-center gap-2">
+                  <span>💳</span> Payment Method
                 </h2>
-                <Link to="/payment" className="text-xs font-bold text-green-700 hover:text-green-800">
-                  Edit
+                <Link to="/payment" className="text-xs font-bold text-green-700 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300">
+                  Change
                 </Link>
               </div>
-              <p className="text-stone-600 text-sm">
-                <strong className="text-stone-900 font-semibold">{cart.paymentMethod}</strong>
-              </p>
+              <div className="flex items-center gap-2.5">
+                {cart.paymentMethod === 'MoMo' ? (
+                  <div className="inline-flex items-center gap-2 bg-pink-50 dark:bg-pink-950/40 border border-pink-200 dark:border-pink-800 px-3 py-1.5 rounded-xl">
+                    <span className="w-5 h-5 rounded-md bg-[#A50064] text-white text-[9px] font-black flex items-center justify-center">
+                      m
+                    </span>
+                    <strong className="text-[#A50064] dark:text-pink-300 font-bold text-sm">MoMo Wallet (MoMo E-Wallet / QR)</strong>
+                  </div>
+                ) : cart.paymentMethod === 'PayPal' ? (
+                  <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 px-3 py-1.5 rounded-xl">
+                    <span className="font-bold text-blue-800 dark:text-blue-300 text-sm">PayPal / International Cards</span>
+                  </div>
+                ) : (
+                  <div className="inline-flex items-center gap-2 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 px-3 py-1.5 rounded-xl">
+                    <span className="font-bold text-amber-800 dark:text-amber-300 text-sm">Pay on Delivery (COD)</span>
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Order Items Review */}
-            <div className="bg-white p-6 rounded-3xl shadow-xs border border-stone-200/80">
-              <h2 className="text-lg font-bold text-stone-900 mb-4 flex items-center gap-2">
+            <div className="bg-white dark:bg-stone-900 p-6 rounded-3xl shadow-xs border border-stone-200/80 dark:border-stone-800 transition-colors duration-200">
+              <h2 className="text-lg font-bold text-stone-900 dark:text-stone-100 mb-4 flex items-center gap-2">
                 <span>📦</span> Cart Harvest Items ({cart.cartItems.length})
               </h2>
 
               {cart.cartItems.length === 0 ? (
-                <p className="text-stone-500 text-sm">Your cart is empty.</p>
+                <p className="text-stone-500 dark:text-stone-400 text-sm">Your cart is empty.</p>
               ) : (
-                <div className="divide-y divide-stone-100">
+                <div className="divide-y divide-stone-100 dark:divide-stone-800">
                   {cart.cartItems.map((item, index) => (
                     <div key={index} className="flex items-center gap-4 py-3.5">
                       <img
                         src={item.image}
                         alt={item.name}
-                        className="w-16 h-16 object-cover rounded-xl bg-stone-50 border border-stone-100 shrink-0"
+                        className="w-16 h-16 object-cover rounded-xl bg-stone-50 dark:bg-stone-800 border border-stone-100 dark:border-stone-700 shrink-0"
                       />
                       <div className="flex-1 min-w-0">
                         <Link
                           to={`/product/${item._id}`}
-                          className="font-bold text-stone-900 hover:text-green-700 text-sm block truncate"
+                          className="font-bold text-stone-900 dark:text-stone-100 hover:text-green-700 dark:hover:text-green-400 text-sm block truncate"
                         >
                           {item.name}
                         </Link>
-                        <span className="text-xs text-stone-500">
+                        <span className="text-xs text-stone-500 dark:text-stone-400">
                           {item.qty} × ${Number(item.price).toFixed(2)}
                         </span>
                       </div>
-                      <div className="font-bold text-stone-900 text-sm">
+                      <div className="font-bold text-stone-900 dark:text-stone-100 text-sm">
                         ${(item.qty * item.price).toFixed(2)}
                       </div>
                     </div>
@@ -136,38 +151,38 @@ function PlaceOrderPage() {
 
           {/* Right Column: Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-3xl shadow-xs border border-stone-200/80 p-6 sticky top-24 space-y-6">
-              <h2 className="text-xl font-black text-stone-900 pb-3 border-b border-stone-100">
+            <div className="bg-white dark:bg-stone-900 rounded-3xl shadow-xs border border-stone-200/80 dark:border-stone-800 p-6 sticky top-24 space-y-6 transition-colors duration-200">
+              <h2 className="text-xl font-black text-stone-900 dark:text-stone-100 pb-3 border-b border-stone-100 dark:border-stone-800">
                 Order Summary
               </h2>
 
               <div className="space-y-3 text-sm">
-                <div className="flex justify-between text-stone-600">
+                <div className="flex justify-between text-stone-600 dark:text-stone-400">
                   <span>Items</span>
-                  <span className="font-semibold text-stone-900">${itemsPrice}</span>
+                  <span className="font-semibold text-stone-900 dark:text-stone-200">${itemsPrice}</span>
                 </div>
-                <div className="flex justify-between text-stone-600">
+                <div className="flex justify-between text-stone-600 dark:text-stone-400">
                   <span>Shipping</span>
-                  <span className="font-semibold text-stone-900">
+                  <span className="font-semibold text-stone-900 dark:text-stone-200">
                     {Number(shippingPrice) === 0 ? (
-                      <span className="text-green-600 font-bold">FREE</span>
+                      <span className="text-green-600 dark:text-green-400 font-bold">FREE</span>
                     ) : (
                       `$${shippingPrice}`
                     )}
                   </span>
                 </div>
-                <div className="flex justify-between text-stone-600">
+                <div className="flex justify-between text-stone-600 dark:text-stone-400">
                   <span>Estimated Tax (15%)</span>
-                  <span className="font-semibold text-stone-900">${taxPrice}</span>
+                  <span className="font-semibold text-stone-900 dark:text-stone-200">${taxPrice}</span>
                 </div>
-                <div className="pt-3 border-t border-stone-100 flex justify-between items-baseline">
-                  <span className="font-black text-stone-900 text-base">Total</span>
-                  <span className="font-black text-green-700 text-2xl">${totalPrice}</span>
+                <div className="pt-3 border-t border-stone-100 dark:border-stone-800 flex justify-between items-baseline">
+                  <span className="font-black text-stone-900 dark:text-stone-100 text-base">Total</span>
+                  <span className="font-black text-green-700 dark:text-green-400 text-2xl">${totalPrice}</span>
                 </div>
               </div>
 
               {error && (
-                <div className="bg-red-50 border border-red-200 text-red-700 p-3.5 rounded-xl text-xs">
+                <div className="bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/60 text-red-700 dark:text-red-300 p-3.5 rounded-xl text-xs">
                   {error?.data?.message || error.error || 'Failed to place order'}
                 </div>
               )}

@@ -21,11 +21,11 @@ function ProductCard({ product }) {
   };
 
   return (
-    <div className="group bg-white rounded-2xl border border-stone-200/80 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden relative">
+    <div className="group bg-white dark:bg-stone-900 rounded-2xl border border-stone-200/80 dark:border-stone-800 shadow-xs hover:shadow-xl dark:hover:shadow-stone-950/60 transition-all duration-300 flex flex-col overflow-hidden relative">
       
       {/* Category / Organic Badge */}
       <div className="absolute top-3 left-3 z-10 flex gap-1">
-        <span className="bg-white/90 backdrop-blur-xs text-green-800 text-[11px] font-bold px-2.5 py-1 rounded-full shadow-2xs border border-green-200/60 uppercase tracking-wide">
+        <span className="bg-white/90 dark:bg-stone-900/90 backdrop-blur-xs text-green-800 dark:text-green-300 text-[11px] font-bold px-2.5 py-1 rounded-full shadow-2xs border border-green-200/60 dark:border-green-800/60 uppercase tracking-wide">
           {product.category || 'Organic'}
         </span>
       </div>
@@ -40,7 +40,7 @@ function ProductCard({ product }) {
       )}
 
       {/* Image with zoom effect */}
-      <Link to={`/product/${product._id}`} className="block h-52 sm:h-56 overflow-hidden bg-stone-50 relative">
+      <Link to={`/product/${product._id}`} className="block h-52 sm:h-56 overflow-hidden bg-stone-50 dark:bg-stone-800/60 relative">
         <img
           src={product.image}
           alt={product.name}
@@ -53,31 +53,31 @@ function ProductCard({ product }) {
       <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between gap-3">
         <div>
           {/* Rating */}
-          <div className="flex items-center gap-1 mb-1.5 text-xs text-amber-500">
+          <div className="flex items-center gap-1 mb-1.5 text-xs text-amber-500 dark:text-amber-400">
             <span>{'★'.repeat(Math.round(product.rating || 5))}</span>
-            <span className="text-stone-400 font-medium ml-1">
+            <span className="text-stone-400 dark:text-stone-400 font-medium ml-1">
               ({product.numReviews || (product.rating ? '12' : '0')})
             </span>
           </div>
 
           {/* Title */}
           <Link to={`/product/${product._id}`}>
-            <h3 className="text-base font-bold text-stone-900 line-clamp-1 group-hover:text-green-700 transition-colors">
+            <h3 className="text-base font-bold text-stone-900 dark:text-stone-100 line-clamp-1 group-hover:text-green-700 dark:group-hover:text-green-400 transition-colors">
               {product.name}
             </h3>
           </Link>
 
           {/* Description snippet if available */}
           {product.brand && (
-            <p className="text-xs text-stone-400 mt-0.5">By {product.brand}</p>
+            <p className="text-xs text-stone-400 dark:text-stone-400 mt-0.5">By {product.brand}</p>
           )}
 
           {/* Price & Stock info */}
           <div className="flex items-baseline gap-2 mt-2">
-            <span className="text-lg font-black text-green-700">
+            <span className="text-lg font-black text-green-700 dark:text-green-400">
               ${(product.price || 0).toFixed(2)}
             </span>
-            <span className="text-xs text-stone-400 font-medium">/ unit</span>
+            <span className="text-xs text-stone-400 dark:text-stone-400 font-medium">/ unit</span>
           </div>
         </div>
 
@@ -87,10 +87,10 @@ function ProductCard({ product }) {
           disabled={isOutOfStock}
           className={`w-full py-2.5 px-4 rounded-xl font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-2 ${
             isOutOfStock
-              ? 'bg-stone-100 text-stone-400 cursor-not-allowed'
+              ? 'bg-stone-100 dark:bg-stone-800 text-stone-400 dark:text-stone-500 cursor-not-allowed'
               : added
               ? 'bg-green-700 text-white shadow-xs'
-              : 'bg-stone-900 hover:bg-green-600 text-white shadow-2xs hover:shadow-md'
+              : 'bg-stone-900 dark:bg-stone-800 hover:bg-green-600 dark:hover:bg-green-600 text-white shadow-2xs hover:shadow-md'
           }`}
         >
           {isOutOfStock ? (

@@ -28,21 +28,32 @@ export const protect = asyncHandler(async (req, res, next) => {
         req.user = await User.findById(decoded.id).select('-password');
       } catch (dbErr) {
         // Fallback for in-memory / mock mode
-        req.user = {
-          _id: decoded.id,
-          name: decoded.id === 'demo-admin-id' ? 'Admin User' : 'Demo User',
-          email: decoded.id === 'demo-admin-id' ? 'admin@organi.com' : 'user@organi.com',
-          role: decoded.id === 'demo-admin-id' ? 'admin' : 'user',
-        };
       }
 
       if (!req.user) {
-        req.user = {
-          _id: decoded.id,
-          name: decoded.id === 'demo-admin-id' ? 'Admin User' : 'Demo User',
-          email: decoded.id === 'demo-admin-id' ? 'admin@organi.com' : 'user@organi.com',
-          role: decoded.id === 'demo-admin-id' ? 'admin' : 'user',
-        };
+        if (decoded.id === 'demo-admin-id') {
+          req.user = { _id: decoded.id, name: 'Admin User', email: 'admin@organi.com', role: 'admin' };
+        } else if (decoded.id === 'demo-farm-berryfield' || decoded.id?.includes('berryfield')) {
+          req.user = {
+            _id: decoded.id,
+            name: 'BerryField Organic Farm',
+            email: 'berryfield@organi.com',
+            role: 'farm',
+            brand: 'BerryField',
+            bankInfo: { bankName: 'Chase Bank', accountNumber: '1904-8833-2101', accountName: 'BERRYFIELD FARMS LLC' },
+          };
+        } else if (decoded.id === 'demo-farm-greenearth' || decoded.id?.includes('greenearth')) {
+          req.user = {
+            _id: decoded.id,
+            name: 'Green Earth Produce',
+            email: 'greenearth@organi.com',
+            role: 'farm',
+            brand: 'Green Earth',
+            bankInfo: { bankName: 'Wells Fargo', accountNumber: '4401-9923-1904', accountName: 'GREEN EARTH COOPERATIVE' },
+          };
+        } else {
+          req.user = { _id: decoded.id, name: 'Demo Customer', email: 'user@organi.com', role: 'user' };
+        }
       }
 
       // 4. Pass to the next middleware or controller
@@ -59,7 +70,7 @@ export const protect = asyncHandler(async (req, res, next) => {
 });
 
 export const admin = (req, res, next) => {
-  if (req.user && req.user.role === 'admin') {
+  if (req.user && (req.user.role === 'admin' || req.user.isAdmin === true)) {
     next();
   } else {
     res.status(401);

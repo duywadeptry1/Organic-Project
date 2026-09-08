@@ -4,6 +4,9 @@ import compression from 'compression';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 // ESM path resolution
 const __filename = fileURLToPath(import.meta.url);
@@ -16,6 +19,7 @@ import connectDB from './server/config/db.js';
 import productRoutes from './server/routes/productRoutes.js';
 import userRoutes from './server/routes/userRoutes.js';
 import orderRoutes from './server/routes/orderRoutes.js';
+import farmRoutes from './server/routes/farmRoutes.js';
 import uploadRoutes from './server/routes/uploadRoutes.js';
 import { notFoundHandler, globalErrorHandler } from './server/middlewares/errorMiddleware.js';
 
@@ -42,6 +46,7 @@ app.use('/uploads', express.static(uploadDir));
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/farm', farmRoutes);
 app.use('/api/upload', uploadRoutes);
 
 // PayPal Client ID Endpoint
@@ -80,5 +85,5 @@ app.use(notFoundHandler);
 app.use(globalErrorHandler);
 
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Organi server listening on http://0.0.0.0:${PORT}`);
+  console.log(`Organi server listening on http://localhost:3000/`);
 });

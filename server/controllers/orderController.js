@@ -1,5 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import Order from '../models/Order.js';
+import { checkProductStock, updateProductStock } from './productController.js';
+import { creditFarmsForDeliveredOrder } from './farmController.js';
 
 // In-memory fallback store for orders
 let memoryOrders = [];
@@ -23,12 +25,25 @@ export const addOrderItems = asyncHandler(async (req, res) => {
     throw new Error('No order items');
   }
 
+  // Validate stock availability before creating order
+  for (const item of orderItems) {
+    const prodId = item._id || item.product;
+    const stockCheck = await checkProductStock(prodId, item.qty);
+    if (!stockCheck.available) {
+      res.status(400);
+      throw new Error(
+        `Product "${stockCheck.name}" has insufficient stock (Available: ${stockCheck.countInStock}, Requested: ${item.qty})`
+      );
+    }
+  }
+
   const userId = req.user?._id || 'demo-user-id';
 
   try {
     const mappedItems = orderItems.map((item) => ({
       ...item,
       product: item._id,
+      brand: item.brand || 'Organi Farm',
       _id: undefined,
     }));
 
@@ -54,6 +69,7 @@ export const addOrderItems = asyncHandler(async (req, res) => {
     orderItems: orderItems.map((item) => ({
       ...item,
       product: item._id,
+      brand: item.brand || 'Organi Farm',
     })),
     user: {
       _id: userId,
@@ -158,32 +174,71 @@ export const updateOrderToPaid = asyncHandler(async (req, res) => {
   throw new Error('Order not found');
 });
 
-// @desc    Update order to delivered
+// @desc    Update order to delivered and deduct in-stock inventory
 // @route   PUT /api/orders/:id/deliver
 // @access  Private/Admin
 export const updateOrderToDelivered = asyncHandler(async (req, res) => {
+  let order;
   try {
-    const order = await Order.findById(req.params.id);
-    if (order) {
-      order.isDelivered = true;
-      order.deliveredAt = Date.now();
-      const updatedOrder = await order.save();
-      return res.json(updatedOrder);
-    }
+    order = await Order.findById(req.params.id);
   } catch (err) {
     // Fall through
   }
 
-  const order = memoryOrders.find((o) => o._id.toString() === req.params.id);
-  if (order) {
-    order.isDelivered = true;
-    order.deliveredAt = new Date().toISOString();
+  if (!order) {
+    order = memoryOrders.find((o) => o._id.toString() === req.params.id);
+  }
+
+  if (!order) {
+    res.status(404);
+    throw new Error('Order not found');
+  }
+
+  // Idempotency check: if order was already delivered, do not deduct stock again
+  if (order.isDelivered) {
     return res.json(order);
   }
 
-  res.status(404);
-  throw new Error('Order not found');
+  // 1. Deduct in-stock for all items in order
+  if (order.orderItems && order.orderItems.length > 0) {
+    for (const item of order.orderItems) {
+      const prodId = item.product || item._id;
+      const qty = Number(item.qty) || 1;
+      await updateProductStock(prodId, qty);
+    }
+  }
+
+  // 2. Mark order as delivered
+  order.isDelivered = true;
+  order.deliveredAt = Date.now();
+
+  // 3. If COD order, mark as paid upon successful delivery
+  if (!order.isPaid && order.paymentMethod === 'COD') {
+    order.isPaid = true;
+    order.paidAt = Date.now();
+    order.paymentResult = {
+      id: `COD_${Date.now()}`,
+      status: 'COMPLETED_ON_DELIVERY',
+      update_time: new Date().toISOString(),
+      email_address: order.user?.email || 'customer@organi.com',
+    };
+  }
+
+  // 4. Automatically credit delivered revenue to each farm/brand wallet
+  try {
+    await creditFarmsForDeliveredOrder(order);
+  } catch (farmErr) {
+    console.error('Error crediting farm wallet on delivery:', farmErr.message);
+  }
+
+  if (typeof order.save === 'function') {
+    const updatedOrder = await order.save();
+    return res.json(updatedOrder);
+  }
+
+  res.json(order);
 });
+
 
 // @desc    Get all orders
 // @route   GET /api/orders
@@ -209,4 +264,5 @@ export default {
   updateOrderToDelivered,
   getOrders,
 };
+
 

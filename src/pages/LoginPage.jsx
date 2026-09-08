@@ -54,17 +54,17 @@ function LoginPage() {
   const displayedError = errorMessage || error?.data?.message || (error?.error ? String(error.error) : null);
 
   return (
-    <div className="bg-[#FDFBF7] min-h-[80vh] flex items-center justify-center py-12 px-4 sm:px-6">
-      <div className="w-full max-w-md bg-white p-8 sm:p-10 rounded-3xl shadow-xs border border-stone-200/80">
+    <div className="bg-[#FDFBF7] dark:bg-stone-950 min-h-[80vh] flex items-center justify-center py-12 px-4 sm:px-6 transition-colors duration-200">
+      <div className="w-full max-w-md bg-white dark:bg-stone-900 p-8 sm:p-10 rounded-3xl shadow-xs border border-stone-200/80 dark:border-stone-800 transition-colors duration-200">
         
         <div className="text-center mb-8">
-          <span className="text-xs font-bold text-green-700 uppercase tracking-widest bg-green-50 px-3 py-1 rounded-full">
+          <span className="text-xs font-bold text-green-700 dark:text-green-400 uppercase tracking-widest bg-green-50 dark:bg-green-950/50 px-3 py-1 rounded-full border border-green-200/30 dark:border-green-800/40">
             Welcome Back
           </span>
-          <h1 className="text-2xl sm:text-3xl font-black text-stone-900 tracking-tight mt-3">
+          <h1 className="text-2xl sm:text-3xl font-black text-stone-900 dark:text-stone-50 tracking-tight mt-3">
             Sign In to Organi
           </h1>
-          <p className="text-xs text-stone-500 mt-1">
+          <p className="text-xs text-stone-500 dark:text-stone-400 mt-1">
             Access your organic orders, favorite harvests, and rapid checkout.
           </p>
         </div>
@@ -74,23 +74,23 @@ function LoginPage() {
           <div
             id="login-error-alert"
             role="alert"
-            className="bg-red-50 border border-red-200/80 text-red-800 px-4 py-3.5 rounded-2xl mb-6 flex items-start gap-3 shadow-xs animate-in fade-in duration-200"
+            className="bg-red-50 dark:bg-red-950/40 border border-red-200/80 dark:border-red-900/60 text-red-800 dark:text-red-300 px-4 py-3.5 rounded-2xl mb-6 flex items-start gap-3 shadow-xs animate-in fade-in duration-200"
           >
-            <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
+            <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 shrink-0 mt-0.5" />
             <div className="text-xs">
-              <p className="font-bold text-red-900">Authentication Failed</p>
-              <p className="text-red-700 mt-0.5">{displayedError}</p>
+              <p className="font-bold text-red-900 dark:text-red-200">Authentication Failed</p>
+              <p className="text-red-700 dark:text-red-400 mt-0.5">{displayedError}</p>
             </div>
           </div>
         )}
 
         <form onSubmit={submitHandler} className="space-y-4">
           <div>
-            <label className="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">
+            <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 uppercase tracking-wider mb-1.5">
               Email Address
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400 dark:text-stone-500">
                 <Mail className="w-4 h-4" />
               </div>
               <input
@@ -101,7 +101,7 @@ function LoginPage() {
                   setEmail(e.target.value);
                   if (errorMessage) setErrorMessage('');
                 }}
-                className="w-full pl-10 pr-4 py-3 text-sm bg-stone-50 border border-stone-200 rounded-2xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 text-stone-800 transition"
+                className="w-full pl-10 pr-4 py-3 text-sm bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-2xl focus:bg-white dark:focus:bg-stone-800 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 text-stone-800 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 transition"
                 required
               />
             </div>
@@ -109,12 +109,12 @@ function LoginPage() {
 
           <div>
             <div className="flex justify-between items-center mb-1.5">
-              <label className="block text-xs font-bold text-stone-700 uppercase tracking-wider">
+              <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 uppercase tracking-wider">
                 Password
               </label>
             </div>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400 dark:text-stone-500">
                 <Lock className="w-4 h-4" />
               </div>
               <input
@@ -125,7 +125,7 @@ function LoginPage() {
                   setPassword(e.target.value);
                   if (errorMessage) setErrorMessage('');
                 }}
-                className="w-full pl-10 pr-4 py-3 text-sm bg-stone-50 border border-stone-200 rounded-2xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 text-stone-800 transition"
+                className="w-full pl-10 pr-4 py-3 text-sm bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-2xl focus:bg-white dark:focus:bg-stone-800 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 text-stone-800 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 transition"
                 required
               />
             </div>
@@ -142,31 +142,45 @@ function LoginPage() {
         </form>
 
         {/* Quick Demo Credentials for Convenience */}
-        <div className="mt-6 p-3.5 bg-stone-50 rounded-2xl border border-stone-200/60 text-xs">
-          <p className="font-bold text-stone-700 mb-2">Demo Accounts in Database:</p>
+        <div className="mt-6 p-3.5 bg-stone-50 dark:bg-stone-800/60 rounded-2xl border border-stone-200/60 dark:border-stone-700/60 text-xs transition-colors">
+          <p className="font-bold text-stone-700 dark:text-stone-300 mb-2">Demo Accounts in Database:</p>
           <div className="flex flex-wrap gap-2">
             <button
               type="button"
+              onClick={() => handleFillDemo('berryfield@organi.com', 'password123')}
+              className="px-2.5 py-1 bg-white dark:bg-stone-750 border border-emerald-300 dark:border-emerald-700/80 hover:border-emerald-500 hover:text-emerald-700 dark:hover:text-emerald-400 rounded-lg font-bold text-[11px] text-emerald-800 dark:text-emerald-300 transition flex items-center gap-1"
+            >
+              🌾 BerryField Farm (Farm Role)
+            </button>
+            <button
+              type="button"
+              onClick={() => handleFillDemo('greenearth@organi.com', 'password123')}
+              className="px-2.5 py-1 bg-white dark:bg-stone-750 border border-emerald-300 dark:border-emerald-700/80 hover:border-emerald-500 hover:text-emerald-700 dark:hover:text-emerald-400 rounded-lg font-bold text-[11px] text-emerald-800 dark:text-emerald-300 transition flex items-center gap-1"
+            >
+              🌱 Green Earth (Farm Role)
+            </button>
+            <button
+              type="button"
               onClick={() => handleFillDemo('admin@organi.com', 'password123')}
-              className="px-2.5 py-1 bg-white border border-stone-200 hover:border-green-500 hover:text-green-700 rounded-lg font-medium text-[11px] text-stone-600 transition"
+              className="px-2.5 py-1 bg-white dark:bg-stone-750 border border-stone-200 dark:border-stone-700 hover:border-amber-500 dark:hover:border-amber-500 hover:text-amber-700 dark:hover:text-amber-400 rounded-lg font-medium text-[11px] text-stone-600 dark:text-stone-300 transition"
             >
               Demo Admin (admin@organi.com)
             </button>
             <button
               type="button"
               onClick={() => handleFillDemo('user@organi.com', 'password123')}
-              className="px-2.5 py-1 bg-white border border-stone-200 hover:border-green-500 hover:text-green-700 rounded-lg font-medium text-[11px] text-stone-600 transition"
+              className="px-2.5 py-1 bg-white dark:bg-stone-750 border border-stone-200 dark:border-stone-700 hover:border-green-500 dark:hover:border-green-500 hover:text-green-700 dark:hover:text-green-400 rounded-lg font-medium text-[11px] text-stone-600 dark:text-stone-300 transition"
             >
               Demo User (user@organi.com)
             </button>
           </div>
         </div>
 
-        <div className="mt-6 pt-6 border-t border-stone-100 text-center text-stone-500 text-xs">
+        <div className="mt-6 pt-6 border-t border-stone-100 dark:border-stone-800 text-center text-stone-500 dark:text-stone-400 text-xs">
           New to Organi?{' '}
           <Link
             to={redirect ? `/register?redirect=${redirect}` : '/register'}
-            className="text-green-700 hover:text-green-800 font-bold ml-1 hover:underline"
+            className="text-green-700 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300 font-bold ml-1 hover:underline"
           >
             Create an Account
           </Link>

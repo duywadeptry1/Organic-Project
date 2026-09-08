@@ -21,8 +21,19 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ['user', 'admin'],
+      enum: ['user', 'admin', 'farm'],
       default: 'user',
+    },
+    brand: {
+      type: String,
+      trim: true,
+      default: '',
+    },
+    bankInfo: {
+      bankName: { type: String, default: '' },
+      accountNumber: { type: String, default: '' },
+      accountName: { type: String, default: '' },
+      routingNumber: { type: String, default: '' },
     },
   },
   {

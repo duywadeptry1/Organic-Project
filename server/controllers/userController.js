@@ -11,6 +11,7 @@ const memoryUsers = [
     email: 'admin@organi.com',
     password: 'password123',
     role: 'admin',
+    brand: '',
   },
   {
     _id: 'demo-user-id',
@@ -18,6 +19,49 @@ const memoryUsers = [
     email: 'user@organi.com',
     password: 'password123',
     role: 'user',
+    brand: '',
+  },
+  {
+    _id: 'demo-farm-berryfield',
+    name: 'BerryField Organic Farm',
+    email: 'berryfield@organi.com',
+    password: 'password123',
+    role: 'farm',
+    brand: 'BerryField',
+    bankInfo: {
+      bankName: 'Chase Bank',
+      accountNumber: '1904-8833-2101',
+      accountName: 'BERRYFIELD FARMS LLC',
+      routingNumber: '021000021',
+    },
+  },
+  {
+    _id: 'demo-farm-greenearth',
+    name: 'Green Earth Produce',
+    email: 'greenearth@organi.com',
+    password: 'password123',
+    role: 'farm',
+    brand: 'Green Earth',
+    bankInfo: {
+      bankName: 'Wells Fargo',
+      accountNumber: '4401-9923-1904',
+      accountName: 'GREEN EARTH COOPERATIVE',
+      routingNumber: '121000248',
+    },
+  },
+  {
+    _id: 'demo-farm-organifarm',
+    name: 'Organi Heritage Farm',
+    email: 'organifarm@organi.com',
+    password: 'password123',
+    role: 'farm',
+    brand: 'Organi Farm',
+    bankInfo: {
+      bankName: 'Bank of America',
+      accountNumber: '8821-3341-1904',
+      accountName: 'ORGANI HERITAGE GROWERS',
+      routingNumber: '026009593',
+    },
   },
 ];
 
@@ -118,6 +162,8 @@ export const authUser = async (req, res, next) => {
             name: user.name,
             email: user.email,
             role: user.role,
+            brand: user.brand || '',
+            bankInfo: user.bankInfo || {},
             token: generateToken(user._id),
           });
         } else {
@@ -142,6 +188,8 @@ export const authUser = async (req, res, next) => {
           name: memUser.name,
           email: memUser.email,
           role: memUser.role,
+          brand: memUser.brand || '',
+          bankInfo: memUser.bankInfo || {},
           token: generateToken(memUser._id),
         });
       } else {
@@ -171,6 +219,8 @@ export const getUserProfile = asyncHandler(async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
+        brand: user.brand || '',
+        bankInfo: user.bankInfo || {},
       });
     }
   } catch (dbErr) {
@@ -183,6 +233,8 @@ export const getUserProfile = asyncHandler(async (req, res) => {
       name: req.user.name,
       email: req.user.email,
       role: req.user.role || 'user',
+      brand: req.user.brand || '',
+      bankInfo: req.user.bankInfo || {},
     });
   }
 

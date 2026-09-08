@@ -31,36 +31,36 @@ function CartPage() {
   };
 
   return (
-    <div className="bg-[#FDFBF7] min-h-screen py-10">
+    <div className="bg-[#FDFBF7] dark:bg-stone-950 min-h-screen py-10 text-stone-800 dark:text-stone-100 transition-colors duration-200">
       <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
         
         {/* Page Title */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl sm:text-4xl font-black text-stone-900 tracking-tight">
+            <h1 className="text-3xl sm:text-4xl font-black text-stone-900 dark:text-stone-50 tracking-tight">
               Shopping Cart
             </h1>
-            <p className="text-stone-500 text-sm mt-1">
+            <p className="text-stone-500 dark:text-stone-400 text-sm mt-1">
               Review your fresh harvest selection before safe & secure checkout.
             </p>
           </div>
           <Link
             to="/shop"
-            className="hidden sm:inline-flex items-center gap-1.5 text-sm font-bold text-green-700 hover:text-green-800"
+            className="hidden sm:inline-flex items-center gap-1.5 text-sm font-bold text-green-700 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300"
           >
             &larr; Continue Shopping
           </Link>
         </div>
 
         {cartItems.length === 0 ? (
-          <div className="bg-white rounded-3xl p-12 text-center border border-stone-200/80 shadow-xs max-w-lg mx-auto">
-            <div className="w-16 h-16 bg-green-50 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="bg-white dark:bg-stone-900 rounded-3xl p-12 text-center border border-stone-200/80 dark:border-stone-800 shadow-xs max-w-lg mx-auto transition-colors duration-200">
+            <div className="w-16 h-16 bg-green-50 dark:bg-green-950/50 text-green-600 dark:text-green-400 rounded-full flex items-center justify-center mx-auto mb-4 border border-green-200/30 dark:border-green-800/40">
               <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
               </svg>
             </div>
-            <h2 className="text-xl font-bold text-stone-900 mb-2">Your Shopping Bag is Empty</h2>
-            <p className="text-stone-500 text-sm mb-6">
+            <h2 className="text-xl font-bold text-stone-900 dark:text-stone-100 mb-2">Your Shopping Bag is Empty</h2>
+            <p className="text-stone-500 dark:text-stone-400 text-sm mb-6">
               Looks like you haven't added any delicious organic produce or groceries yet!
             </p>
             <Link
@@ -77,27 +77,27 @@ function CartPage() {
             <div className="lg:col-span-2 space-y-4">
               
               {/* Free Shipping Progress Bar */}
-              <div className="bg-white p-4 rounded-2xl border border-stone-200/80 shadow-xs">
+              <div className="bg-white dark:bg-stone-900 p-4 rounded-2xl border border-stone-200/80 dark:border-stone-800 shadow-xs transition-colors duration-200">
                 <div className="flex items-center justify-between text-xs font-bold mb-2">
-                  <span className="text-stone-700">
+                  <span className="text-stone-700 dark:text-stone-300">
                     {freeShippingDiff > 0
                       ? `Add $${freeShippingDiff.toFixed(2)} more for FREE Express Shipping!`
                       : '🎉 You qualified for FREE Express Shipping!'}
                   </span>
-                  <span className="text-green-700">
+                  <span className="text-green-700 dark:text-green-400">
                     {Math.min(100, Math.round((cartSubtotal / freeShippingThreshold) * 100))}%
                   </span>
                 </div>
-                <div className="w-full bg-stone-100 rounded-full h-2 overflow-hidden">
+                <div className="w-full bg-stone-100 dark:bg-stone-800 rounded-full h-2 overflow-hidden">
                   <div
-                    className="bg-green-600 h-full rounded-full transition-all duration-500"
+                    className="bg-green-600 dark:bg-green-500 h-full rounded-full transition-all duration-500"
                     style={{ width: `${Math.min(100, (cartSubtotal / freeShippingThreshold) * 100)}%` }}
                   ></div>
                 </div>
               </div>
 
               {/* Items Card List */}
-              <div className="bg-white rounded-3xl shadow-xs border border-stone-200/80 divide-y divide-stone-100 overflow-hidden">
+              <div className="bg-white dark:bg-stone-900 rounded-3xl shadow-xs border border-stone-200/80 dark:border-stone-800 divide-y divide-stone-100 dark:divide-stone-800 overflow-hidden transition-colors duration-200">
                 {cartItems.map((item) => {
                   const stock = item.countInStock !== undefined ? item.countInStock : (item.stock ?? 20);
                   return (
@@ -108,45 +108,45 @@ function CartPage() {
                         <img
                           src={item.image}
                           alt={item.name}
-                          className="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-2xl bg-stone-50 border border-stone-100"
+                          className="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-2xl bg-stone-50 dark:bg-stone-800 border border-stone-100 dark:border-stone-700"
                         />
                       </Link>
 
                       {/* Info */}
                       <div className="flex-1 min-w-0 text-center sm:text-left">
-                        <span className="text-[11px] font-bold text-green-700 uppercase tracking-wider">
+                        <span className="text-[11px] font-bold text-green-700 dark:text-green-400 uppercase tracking-wider">
                           {item.category || 'Organic'}
                         </span>
                         <Link
                           to={`/product/${item._id}`}
-                          className="text-base sm:text-lg font-bold text-stone-900 hover:text-green-700 transition block truncate mt-0.5"
+                          className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 hover:text-green-700 dark:hover:text-green-400 transition block truncate mt-0.5"
                         >
                           {item.name}
                         </Link>
-                        <p className="text-stone-500 text-xs mt-0.5">
-                          Unit Price: <span className="font-semibold text-stone-800">${item.price.toFixed(2)}</span>
+                        <p className="text-stone-500 dark:text-stone-400 text-xs mt-0.5">
+                          Unit Price: <span className="font-semibold text-stone-800 dark:text-stone-200">${item.price.toFixed(2)}</span>
                         </p>
                       </div>
 
                       {/* Quantity Stepper */}
                       <div className="flex items-center gap-2">
-                        <div className="flex items-center border border-stone-200 rounded-xl bg-stone-50 p-1">
+                        <div className="flex items-center border border-stone-200 dark:border-stone-700 rounded-xl bg-stone-50 dark:bg-stone-800 p-1">
                           <button
                             type="button"
                             onClick={() => updateQuantity(item, item.qty - 1)}
                             disabled={item.qty <= 1}
-                            className="w-7 h-7 rounded-lg bg-white shadow-2xs text-stone-700 font-bold hover:bg-stone-100 disabled:opacity-30 flex items-center justify-center"
+                            className="w-7 h-7 rounded-lg bg-white dark:bg-stone-700 shadow-2xs text-stone-700 dark:text-stone-200 font-bold hover:bg-stone-100 dark:hover:bg-stone-600 disabled:opacity-30 flex items-center justify-center transition-colors"
                           >
                             -
                           </button>
-                          <span className="w-9 text-center font-bold text-stone-900 text-sm">
+                          <span className="w-9 text-center font-bold text-stone-900 dark:text-stone-100 text-sm">
                             {item.qty}
                           </span>
                           <button
                             type="button"
                             onClick={() => updateQuantity(item, item.qty + 1)}
                             disabled={item.qty >= stock}
-                            className="w-7 h-7 rounded-lg bg-white shadow-2xs text-stone-700 font-bold hover:bg-stone-100 disabled:opacity-30 flex items-center justify-center"
+                            className="w-7 h-7 rounded-lg bg-white dark:bg-stone-700 shadow-2xs text-stone-700 dark:text-stone-200 font-bold hover:bg-stone-100 dark:hover:bg-stone-600 disabled:opacity-30 flex items-center justify-center transition-colors"
                           >
                             +
                           </button>
@@ -155,7 +155,7 @@ function CartPage() {
 
                       {/* Total Item Price */}
                       <div className="text-right min-w-20">
-                        <span className="text-base sm:text-lg font-black text-stone-900 block">
+                        <span className="text-base sm:text-lg font-black text-stone-900 dark:text-stone-100 block">
                           ${(item.qty * item.price).toFixed(2)}
                         </span>
                       </div>
@@ -163,7 +163,7 @@ function CartPage() {
                       {/* Delete Action */}
                       <button
                         onClick={() => removeFromCartHandler(item._id)}
-                        className="p-2 text-stone-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition"
+                        className="p-2 text-stone-400 dark:text-stone-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 rounded-xl transition"
                         title="Remove item"
                       >
                         <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -179,38 +179,38 @@ function CartPage() {
 
             {/* Right Column: Order Summary */}
             <div className="lg:col-span-1">
-              <div className="bg-white rounded-3xl shadow-xs border border-stone-200/80 p-6 sticky top-24 space-y-6">
-                <h2 className="text-xl font-black text-stone-900 pb-3 border-b border-stone-100">
+              <div className="bg-white dark:bg-stone-900 rounded-3xl shadow-xs border border-stone-200/80 dark:border-stone-800 p-6 sticky top-24 space-y-6 transition-colors duration-200">
+                <h2 className="text-xl font-black text-stone-900 dark:text-stone-100 pb-3 border-b border-stone-100 dark:border-stone-800">
                   Order Summary
                 </h2>
 
                 <div className="space-y-3 text-sm">
-                  <div className="flex justify-between text-stone-600">
+                  <div className="flex justify-between text-stone-600 dark:text-stone-400">
                     <span>Items Subtotal ({cartItemCount} items)</span>
-                    <span className="font-semibold text-stone-900">${cartSubtotal.toFixed(2)}</span>
+                    <span className="font-semibold text-stone-900 dark:text-stone-200">${cartSubtotal.toFixed(2)}</span>
                   </div>
 
-                  <div className="flex justify-between text-stone-600">
+                  <div className="flex justify-between text-stone-600 dark:text-stone-400">
                     <span>Estimated Shipping</span>
-                    <span className="font-semibold text-stone-900">
+                    <span className="font-semibold text-stone-900 dark:text-stone-200">
                       {cartSubtotal >= freeShippingThreshold || cartSubtotal === 0 ? (
-                        <span className="text-green-600 font-bold">FREE</span>
+                        <span className="text-green-600 dark:text-green-400 font-bold">FREE</span>
                       ) : (
                         '$10.00'
                       )}
                     </span>
                   </div>
 
-                  <div className="flex justify-between text-stone-600">
+                  <div className="flex justify-between text-stone-600 dark:text-stone-400">
                     <span>Estimated Tax (15%)</span>
-                    <span className="font-semibold text-stone-900">
+                    <span className="font-semibold text-stone-900 dark:text-stone-200">
                       ${(cartSubtotal * 0.15).toFixed(2)}
                     </span>
                   </div>
 
-                  <div className="pt-4 border-t border-stone-100 flex justify-between items-baseline">
-                    <span className="font-black text-stone-900 text-base">Estimated Total</span>
-                    <span className="font-black text-green-700 text-2xl">
+                  <div className="pt-4 border-t border-stone-100 dark:border-stone-800 flex justify-between items-baseline">
+                    <span className="font-black text-stone-900 dark:text-stone-100 text-base">Estimated Total</span>
+                    <span className="font-black text-green-700 dark:text-green-400 text-2xl">
                       ${(
                         cartSubtotal +
                         (cartSubtotal >= freeShippingThreshold ? 0 : 10) +
@@ -228,11 +228,11 @@ function CartPage() {
                 </button>
 
                 {/* Trust Badges */}
-                <div className="pt-2 border-t border-stone-100 text-center space-y-2">
-                  <p className="text-xs text-stone-400 font-medium">
+                <div className="pt-2 border-t border-stone-100 dark:border-stone-800 text-center space-y-2">
+                  <p className="text-xs text-stone-400 dark:text-stone-500 font-medium">
                     🔒 256-Bit SSL Encrypted & Secure Checkout
                   </p>
-                  <p className="text-xs text-stone-400 font-medium">
+                  <p className="text-xs text-stone-400 dark:text-stone-500 font-medium">
                     🌿 100% Organi Freshness Guaranteed
                   </p>
                 </div>

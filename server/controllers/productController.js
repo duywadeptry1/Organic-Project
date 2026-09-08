@@ -333,6 +333,72 @@ export const deleteProduct = asyncHandler(async (req, res) => {
   throw new Error('Product not found');
 });
 
+// @desc    Check if product has sufficient stock
+export const checkProductStock = async (productId, requestedQty) => {
+  const qty = Number(requestedQty) || 1;
+  let product;
+  try {
+    product = await Product.findById(productId);
+  } catch (err) {
+    // Fall through
+  }
+
+  if (!product) {
+    const idStr = productId?.toString();
+    product = memoryProducts.find((p) => p._id?.toString() === idStr || p.id?.toString() === idStr);
+  }
+
+  if (product) {
+    const available = product.countInStock !== undefined ? product.countInStock : (product.stock ?? 0);
+    if (available < qty) {
+      return {
+        available: false,
+        name: product.name,
+        countInStock: available,
+      };
+    }
+    return {
+      available: true,
+      name: product.name,
+      countInStock: available,
+    };
+  }
+
+  return { available: true, name: 'Product', countInStock: 999 };
+};
+
+// @desc    Deduct product stock in database and memory fallback
+export const updateProductStock = async (productId, qtyToDeduct) => {
+  const qty = Number(qtyToDeduct) || 0;
+  if (qty <= 0) return;
+
+  // 1. Update in MongoDB
+  try {
+    const product = await Product.findById(productId);
+    if (product) {
+      const currentStock = product.countInStock !== undefined ? product.countInStock : (product.stock ?? 0);
+      const newStock = Math.max(0, currentStock - qty);
+      product.countInStock = newStock;
+      product.stock = newStock;
+      await product.save();
+      console.log(`[Inventory] Deducted ${qty} units for "${product.name}". Remaining stock: ${newStock}`);
+    }
+  } catch (err) {
+    console.error('[Inventory DB Error]:', err.message);
+  }
+
+  // 2. Update in memoryProducts fallback
+  const idStr = productId?.toString();
+  const memProd = memoryProducts.find((p) => p._id?.toString() === idStr || p.id?.toString() === idStr);
+  if (memProd) {
+    const currentMemStock = memProd.countInStock !== undefined ? memProd.countInStock : (memProd.stock ?? 0);
+    const newMemStock = Math.max(0, currentMemStock - qty);
+    memProd.countInStock = newMemStock;
+    memProd.stock = newMemStock;
+    console.log(`[Inventory Memory] Deducted ${qty} units for "${memProd.name}". Remaining: ${newMemStock}`);
+  }
+};
+
 export default {
   getProducts,
   getProductById,
@@ -340,5 +406,8 @@ export default {
   bulkCreateProducts,
   updateProduct,
   deleteProduct,
+  checkProductStock,
+  updateProductStock,
 };
+
 

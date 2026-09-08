@@ -7,7 +7,7 @@ function AdminLayout() {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FBF9F5] text-stone-800">
+    <div className="min-h-screen flex flex-col bg-[#FBF9F5] dark:bg-stone-950 text-stone-800 dark:text-stone-100 transition-colors duration-200">
       <Header />
 
       {/* Admin Subheader Bar */}
@@ -42,6 +42,22 @@ function AdminLayout() {
               }`}
             >
               Customer Orders
+            </Link>
+            <Link
+              to="/admin/withdrawals"
+              className={`px-3 py-1.5 rounded-lg transition ${
+                isActive('/admin/withdrawals')
+                  ? 'bg-green-600 text-white font-bold'
+                  : 'text-stone-300 hover:text-white hover:bg-stone-800'
+              }`}
+            >
+              Farm Payouts
+            </Link>
+            <Link
+              to="/farm/dashboard"
+              className="px-3 py-1.5 rounded-lg text-emerald-400 hover:text-emerald-300 hover:bg-stone-800 transition font-medium"
+            >
+              Farm Portal &rarr;
             </Link>
             <Link
               to="/shop"

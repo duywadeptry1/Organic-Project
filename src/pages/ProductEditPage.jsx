@@ -71,26 +71,26 @@ function ProductEditPage() {
   };
 
   return (
-    <div className="bg-[#FDFBF7] min-h-screen py-10">
+    <div className="bg-[#FDFBF7] dark:bg-stone-950 min-h-screen py-10 text-stone-800 dark:text-stone-100 transition-colors duration-200">
       <div className="container mx-auto px-4 sm:px-6 max-w-3xl">
         
         <Link 
           to="/admin/productlist" 
-          className="text-xs font-bold text-green-700 hover:text-green-800 mb-6 inline-flex items-center gap-1.5"
+          className="text-xs font-bold text-green-700 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300 mb-6 inline-flex items-center gap-1.5"
         >
           &larr; Back to Catalog List
         </Link>
 
-        <div className="bg-white p-6 sm:p-10 rounded-3xl shadow-xs border border-stone-200/80">
+        <div className="bg-white dark:bg-stone-900 p-6 sm:p-10 rounded-3xl shadow-xs border border-stone-200/80 dark:border-stone-800 transition-colors duration-200">
           
-          <div className="mb-6 pb-4 border-b border-stone-100">
-            <span className="text-xs font-bold text-green-700 uppercase tracking-widest bg-green-50 px-3 py-1 rounded-full">
+          <div className="mb-6 pb-4 border-b border-stone-100 dark:border-stone-800">
+            <span className="text-xs font-bold text-green-700 dark:text-green-400 uppercase tracking-widest bg-green-50 dark:bg-green-950/50 px-3 py-1 rounded-full border border-green-200/30 dark:border-green-800/40">
               Product Editor
             </span>
-            <h1 className="text-2xl sm:text-3xl font-black text-stone-900 tracking-tight mt-2">
+            <h1 className="text-2xl sm:text-3xl font-black text-stone-900 dark:text-stone-50 tracking-tight mt-2">
               Edit Produce Details
             </h1>
-            <p className="text-xs text-stone-500 mt-0.5">
+            <p className="text-xs text-stone-500 dark:text-stone-400 mt-0.5">
               Modify inventory counts, organic certificates, pricing, and display imagery.
             </p>
           </div>
@@ -100,14 +100,14 @@ function ProductEditPage() {
               <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-green-600"></div>
             </div>
           ) : error ? (
-            <div className="bg-red-50 text-red-700 text-xs p-6 rounded-2xl text-center">
+            <div className="bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 text-xs p-6 rounded-2xl border border-red-200 dark:border-red-900/60 text-center">
               {error?.data?.message || error.error || 'Failed to load product details'}
             </div>
           ) : (
             <form onSubmit={submitHandler} className="space-y-5">
               
               <div>
-                <label className="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 uppercase tracking-wider mb-1.5">
                   Produce Name
                 </label>
                 <input 
@@ -115,14 +115,14 @@ function ProductEditPage() {
                   placeholder="e.g. Organic Avocados" 
                   value={name} 
                   onChange={(e) => setName(e.target.value)} 
-                  className="w-full px-4 py-2.5 text-sm bg-stone-50 border border-stone-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 text-stone-800"
+                  className="w-full px-4 py-2.5 text-sm bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-xl focus:bg-white dark:focus:bg-stone-800 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 text-stone-800 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 transition"
                   required 
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">
+                  <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 uppercase tracking-wider mb-1.5">
                     Price ($ USD)
                   </label>
                   <input 
@@ -131,13 +131,13 @@ function ProductEditPage() {
                     placeholder="0.00" 
                     value={price} 
                     onChange={(e) => setPrice(e.target.value)} 
-                    className="w-full px-4 py-2.5 text-sm bg-stone-50 border border-stone-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 text-stone-800"
+                    className="w-full px-4 py-2.5 text-sm bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-xl focus:bg-white dark:focus:bg-stone-800 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 text-stone-800 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 transition"
                     required 
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">
+                  <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 uppercase tracking-wider mb-1.5">
                     Count In Stock
                   </label>
                   <input 
@@ -145,7 +145,7 @@ function ProductEditPage() {
                     placeholder="0" 
                     value={countInStock} 
                     onChange={(e) => setCountInStock(e.target.value)} 
-                    className="w-full px-4 py-2.5 text-sm bg-stone-50 border border-stone-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 text-stone-800"
+                    className="w-full px-4 py-2.5 text-sm bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-xl focus:bg-white dark:focus:bg-stone-800 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 text-stone-800 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 transition"
                     required 
                   />
                 </div>
@@ -153,7 +153,7 @@ function ProductEditPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">
+                  <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 uppercase tracking-wider mb-1.5">
                     Category
                   </label>
                   <input 
@@ -161,13 +161,13 @@ function ProductEditPage() {
                     placeholder="e.g. Vegetables, Fresh Fruit, Dairy" 
                     value={category} 
                     onChange={(e) => setCategory(e.target.value)} 
-                    className="w-full px-4 py-2.5 text-sm bg-stone-50 border border-stone-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 text-stone-800"
+                    className="w-full px-4 py-2.5 text-sm bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-xl focus:bg-white dark:focus:bg-stone-800 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 text-stone-800 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 transition"
                     required 
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">
+                  <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 uppercase tracking-wider mb-1.5">
                     Farm / Brand
                   </label>
                   <input 
@@ -175,15 +175,15 @@ function ProductEditPage() {
                     placeholder="e.g. Valley Organic Farm" 
                     value={brand} 
                     onChange={(e) => setBrand(e.target.value)} 
-                    className="w-full px-4 py-2.5 text-sm bg-stone-50 border border-stone-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 text-stone-800"
+                    className="w-full px-4 py-2.5 text-sm bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-xl focus:bg-white dark:focus:bg-stone-800 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 text-stone-800 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 transition"
                     required 
                   />
                 </div>
               </div>
 
               {/* Image Section */}
-              <div className="p-4 bg-stone-50/70 border border-stone-200/70 rounded-2xl space-y-3">
-                <label className="block text-xs font-bold text-stone-700 uppercase tracking-wider">
+              <div className="p-4 bg-stone-50/70 dark:bg-stone-850/60 border border-stone-200/70 dark:border-stone-800 rounded-2xl space-y-3">
+                <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 uppercase tracking-wider">
                   Product Image
                 </label>
                 
@@ -192,10 +192,10 @@ function ProductEditPage() {
                     <img 
                       src={image} 
                       alt="Preview" 
-                      className="w-16 h-16 rounded-xl object-cover border border-stone-200 bg-white shrink-0" 
+                      className="w-16 h-16 rounded-xl object-cover border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 shrink-0" 
                     />
                   ) : (
-                    <div className="w-16 h-16 rounded-xl border border-stone-200 bg-stone-100 flex items-center justify-center text-stone-400 text-xs shrink-0">
+                    <div className="w-16 h-16 rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-stone-400 text-xs shrink-0">
                       No Img
                     </div>
                   )}
@@ -206,12 +206,12 @@ function ProductEditPage() {
                       placeholder="Image URL (or upload below)" 
                       value={image} 
                       onChange={(e) => setImage(e.target.value)} 
-                      className="w-full px-3.5 py-2 text-xs bg-white border border-stone-200 rounded-xl focus:outline-none focus:ring-1 focus:ring-green-500 text-stone-800"
+                      className="w-full px-3.5 py-2 text-xs bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-xl focus:outline-none focus:ring-1 focus:ring-green-500 text-stone-800 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 transition"
                       required 
                     />
                     
                     <div className="flex items-center gap-2">
-                      <label className="cursor-pointer inline-flex items-center gap-1 text-xs font-bold text-green-700 bg-white border border-stone-200 px-3 py-1.5 rounded-lg hover:bg-stone-50 transition shadow-2xs">
+                      <label className="cursor-pointer inline-flex items-center gap-1 text-xs font-bold text-green-700 dark:text-green-400 bg-white dark:bg-stone-750 border border-stone-200 dark:border-stone-700 px-3 py-1.5 rounded-lg hover:bg-stone-50 dark:hover:bg-stone-700 transition shadow-2xs">
                         <span>📁 Choose File</span>
                         <input
                           type="file"
@@ -219,14 +219,14 @@ function ProductEditPage() {
                           className="hidden"
                         />
                       </label>
-                      {loadingUpload && <span className="text-xs text-stone-500">Uploading image...</span>}
+                      {loadingUpload && <span className="text-xs text-stone-500 dark:text-stone-400">Uploading image...</span>}
                     </div>
                   </div>
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 uppercase tracking-wider mb-1.5">
                   Detailed Description
                 </label>
                 <textarea 
@@ -234,7 +234,7 @@ function ProductEditPage() {
                   value={description} 
                   onChange={(e) => setDescription(e.target.value)} 
                   rows={4}
-                  className="w-full px-4 py-2.5 text-sm bg-stone-50 border border-stone-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 text-stone-800" 
+                  className="w-full px-4 py-2.5 text-sm bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-xl focus:bg-white dark:focus:bg-stone-800 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 text-stone-800 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 transition" 
                   required
                 />
               </div>
@@ -242,7 +242,7 @@ function ProductEditPage() {
               <button 
                 type="submit" 
                 disabled={loadingUpdate}
-                className="w-full mt-4 bg-green-600 hover:bg-green-700 text-white font-bold py-3.5 px-6 rounded-2xl text-sm transition duration-200 shadow-md hover:shadow-lg disabled:opacity-50"
+                className="w-full mt-4 bg-green-600 hover:bg-green-700 text-white font-bold py-3.5 px-6 rounded-2xl text-sm transition duration-200 shadow-md hover:shadow-lg disabled:opacity-50 cursor-pointer"
               >
                 {loadingUpdate ? 'Saving Updates...' : 'Update Product & Return to List →'}
               </button>

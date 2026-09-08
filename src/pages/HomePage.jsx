@@ -18,7 +18,7 @@ function HomePage() {
     : allProducts.filter((p) => p.category?.toLowerCase() === selectedCategory.toLowerCase());
 
   return (
-    <div className="bg-[#FDFBF7] min-h-screen">
+    <div className="bg-[#FDFBF7] dark:bg-stone-950 min-h-screen">
       {/* Hero Section */}
       <section className="relative min-h-[520px] md:min-h-[580px] flex items-center justify-center overflow-hidden">
         <div
@@ -28,7 +28,7 @@ function HomePage() {
               "url('https://images.unsplash.com/photo-1542838132-92c53300491e?w=1920&q=80')",
           }}
         ></div>
-        <div className="absolute inset-0 bg-stone-950/45 backdrop-brightness-90"></div>
+        <div className="absolute inset-0 bg-stone-950/50 backdrop-brightness-90"></div>
 
         <div className="relative z-10 text-center px-4 max-w-3xl mx-auto py-16">
           <span className="inline-block bg-green-500/90 text-white font-bold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full mb-4 shadow-xs">
@@ -49,7 +49,7 @@ function HomePage() {
             </Link>
             <a
               href="#featured"
-              className="bg-white/90 hover:bg-white text-stone-900 font-bold py-3.5 px-7 rounded-full transition-all text-base shadow-md hover:shadow-lg backdrop-blur-xs"
+              className="bg-white/90 dark:bg-stone-900/90 hover:bg-white dark:hover:bg-stone-900 text-stone-900 dark:text-stone-100 font-bold py-3.5 px-7 rounded-full transition-all text-base shadow-md hover:shadow-lg backdrop-blur-xs"
             >
               Explore Harvest
             </a>
@@ -58,55 +58,55 @@ function HomePage() {
       </section>
 
       {/* Value Proposition Strip */}
-      <section className="border-b border-stone-200/80 bg-white py-8">
+      <section className="border-b border-stone-200/80 dark:border-stone-800 bg-white dark:bg-stone-900/80 py-8">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center md:text-left">
             
             <div className="flex items-center gap-3.5 p-2 justify-center md:justify-start">
-              <div className="w-12 h-12 rounded-2xl bg-green-100 text-green-700 flex items-center justify-center shrink-0">
+              <div className="w-12 h-12 rounded-2xl bg-green-100 dark:bg-green-950/60 text-green-700 dark:text-green-400 flex items-center justify-center shrink-0">
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
               <div>
-                <h4 className="font-bold text-stone-900 text-sm">100% Organic</h4>
-                <p className="text-xs text-stone-500 mt-0.5">Strict organic certification</p>
+                <h4 className="font-bold text-stone-900 dark:text-stone-100 text-sm">100% Organic</h4>
+                <p className="text-xs text-stone-500 dark:text-stone-400 mt-0.5">Strict organic certification</p>
               </div>
             </div>
 
             <div className="flex items-center gap-3.5 p-2 justify-center md:justify-start">
-              <div className="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0">
+              <div className="w-12 h-12 rounded-2xl bg-amber-100 dark:bg-amber-950/60 text-amber-700 dark:text-amber-400 flex items-center justify-center shrink-0">
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
               <div>
-                <h4 className="font-bold text-stone-900 text-sm">Express Delivery</h4>
-                <p className="text-xs text-stone-500 mt-0.5">Fresh harvest daily</p>
+                <h4 className="font-bold text-stone-900 dark:text-stone-100 text-sm">Express Delivery</h4>
+                <p className="text-xs text-stone-500 dark:text-stone-400 mt-0.5">Fresh harvest daily</p>
               </div>
             </div>
 
             <div className="flex items-center gap-3.5 p-2 justify-center md:justify-start">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 flex items-center justify-center shrink-0">
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" />
                 </svg>
               </div>
               <div>
-                <h4 className="font-bold text-stone-900 text-sm">Local Farms</h4>
-                <p className="text-xs text-stone-500 mt-0.5">Supporting regenerative growers</p>
+                <h4 className="font-bold text-stone-900 dark:text-stone-100 text-sm">Local Farms</h4>
+                <p className="text-xs text-stone-500 dark:text-stone-400 mt-0.5">Supporting regenerative growers</p>
               </div>
             </div>
 
             <div className="flex items-center gap-3.5 p-2 justify-center md:justify-start">
-              <div className="w-12 h-12 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center shrink-0">
+              <div className="w-12 h-12 rounded-2xl bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-400 flex items-center justify-center shrink-0">
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
               <div>
-                <h4 className="font-bold text-stone-900 text-sm">100% Guarantee</h4>
-                <p className="text-xs text-stone-500 mt-0.5">Freshness or money back</p>
+                <h4 className="font-bold text-stone-900 dark:text-stone-100 text-sm">100% Guarantee</h4>
+                <p className="text-xs text-stone-500 dark:text-stone-400 mt-0.5">Freshness or money back</p>
               </div>
             </div>
 
@@ -115,14 +115,14 @@ function HomePage() {
       </section>
 
       {/* Categories Showcase */}
-      <section className="py-12 bg-[#FDFBF7]">
+      <section className="py-12 bg-[#FDFBF7] dark:bg-stone-950">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="flex items-end justify-between mb-8">
             <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-green-700">Categories</span>
-              <h2 className="text-2xl sm:text-3xl font-black text-stone-900 mt-1">Explore By Category</h2>
+              <span className="text-xs font-bold uppercase tracking-widest text-green-700 dark:text-green-400">Categories</span>
+              <h2 className="text-2xl sm:text-3xl font-black text-stone-900 dark:text-stone-100 mt-1">Explore By Category</h2>
             </div>
-            <Link to="/shop" className="text-sm font-bold text-green-700 hover:text-green-800 flex items-center gap-1">
+            <Link to="/shop" className="text-sm font-bold text-green-700 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300 flex items-center gap-1">
               View all <span aria-hidden="true">&rarr;</span>
             </Link>
           </div>
@@ -153,10 +153,10 @@ function HomePage() {
       </section>
 
       {/* Featured Products Section */}
-      <section id="featured" className="py-16 bg-white border-t border-stone-200/70">
+      <section id="featured" className="py-16 bg-white dark:bg-stone-950 border-t border-stone-200/70 dark:border-stone-800/80">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="text-center max-w-xl mx-auto mb-8">
-            <h2 className="text-3xl sm:text-4xl font-black text-stone-900 tracking-tight">Featured Products</h2>
+            <h2 className="text-3xl sm:text-4xl font-black text-stone-900 dark:text-stone-100 tracking-tight">Featured Products</h2>
             <div className="w-20 h-1 bg-green-500 mx-auto rounded-full mt-2 mb-6"></div>
             
             {/* Category Filter Tabs */}
@@ -168,7 +168,7 @@ function HomePage() {
                   className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
                     selectedCategory === cat
                       ? 'bg-green-600 text-white shadow-xs'
-                      : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+                      : 'bg-stone-100 dark:bg-stone-800/80 text-stone-600 dark:text-stone-300 hover:bg-stone-200 dark:hover:bg-stone-700'
                   }`}
                 >
                   {cat}

@@ -13,6 +13,7 @@ const orderSchema = new mongoose.Schema(
         qty: { type: Number, required: true },
         image: { type: String, required: true },
         price: { type: Number, required: true },
+        brand: { type: String, default: 'Organi Farm' },
         product: {
           type: mongoose.Schema.Types.ObjectId,
           required: true,

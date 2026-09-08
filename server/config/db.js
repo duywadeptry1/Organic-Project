@@ -8,16 +8,16 @@ const connectDB = async () => {
 
   try {
     console.log('Connecting to MongoDB...');
-    mongoose.set('bufferCommands', false);
     const conn = await mongoose.connect(process.env.MONGO_URI, {
-      serverSelectionTimeoutMS: 4000,
+      serverSelectionTimeoutMS: 8000,
       family: 4,
     });
     console.log(`Connected successfully to MongoDB ✅: ${conn.connection.host}`);
+    return conn;
   } catch (error) {
     console.warn(`⚠️ MongoDB connection warning: ${error.message}. Running with in-memory store.`);
+    throw error;
   }
 };
 
 export default connectDB;
-
