@@ -24,7 +24,7 @@ import uploadRoutes from './server/routes/uploadRoutes.js';
 import { notFoundHandler, globalErrorHandler } from './server/middlewares/errorMiddleware.js';
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Initialize Database connection (soft fallback if offline)
 connectDB();
@@ -64,7 +64,9 @@ app.get('/api/health', (req, res) => {
 });
 
 // Serve frontend: Vite dev middleware in development, static files in production
-if (process.env.NODE_ENV !== 'production') {
+const isProduction = process.env.NODE_ENV === 'production' || (!process.env.NODE_ENV && fs.existsSync(path.join(__dirname, 'dist', 'index.html')));
+
+if (!isProduction) {
   const { createServer: createViteServer } = await import('vite');
   const vite = await createViteServer({
     server: { middlewareMode: true },
@@ -75,7 +77,10 @@ if (process.env.NODE_ENV !== 'production') {
 } else {
   const distPath = path.join(__dirname, 'dist');
   app.use(express.static(distPath));
-  app.get('*', (req, res) => {
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api')) {
+      return next();
+    }
     res.sendFile(path.join(distPath, 'index.html'));
   });
 }
@@ -85,5 +90,6 @@ app.use(notFoundHandler);
 app.use(globalErrorHandler);
 
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Organi server listening on http://localhost:3000/`);
+  console.log(`Organi server listening on http://localhost:${PORT}/ (Port: ${PORT})`);
 });
+
