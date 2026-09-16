@@ -176,7 +176,7 @@ function ProfilePage() {
                 </div>
               ) : (
                 <div className="overflow-x-auto">
-                  <table className="w-full text-left text-xs border-collapse">
+                  <table className="w-full min-w-[540px] text-left text-xs border-collapse">
                     <thead>
                       <tr className="border-b border-stone-100 dark:border-stone-800 text-stone-400 dark:text-stone-500 font-bold uppercase tracking-wider">
                         <th className="pb-3 pr-2">Order ID</th>

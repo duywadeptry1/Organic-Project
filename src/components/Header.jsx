@@ -41,13 +41,13 @@ function Header() {
       }`}
     >
       <div className="backdrop-blur-[1px] bg-white/40 dark:bg-stone-900/40 border-b border-stone-200/60 dark:border-stone-800/60">
-        <div className="container mx-auto px-4 sm:px-6 h-18 flex items-center justify-between gap-4">
+        <div className="container mx-auto px-3 sm:px-6 h-16 sm:h-18 flex items-center justify-between gap-2 sm:gap-4">
           
           {/* Left: Brand Logo */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-3 sm:gap-6">
             <Link
               to="/"
-              className="flex items-center text-2xl sm:text-3xl font-black text-green-700 dark:text-green-500 tracking-tight hover:opacity-90 transition-opacity"
+              className="flex items-center text-xl sm:text-2xl md:text-3xl font-black text-green-700 dark:text-green-500 tracking-tight hover:opacity-90 transition-opacity shrink-0"
             >
               ORGANIc<span className="text-stone-900 dark:text-stone-100">.</span>
             </Link>
@@ -154,7 +154,7 @@ function Header() {
               {/* Cart Dropdown Menu */}
               <div
                 tabIndex={0}
-                className="card card-sm dropdown-content z-50 mt-3 w-84 shadow-xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 rounded-2xl text-stone-800 dark:text-stone-100"
+                className="card card-sm dropdown-content z-50 mt-3 w-72 sm:w-84 max-w-[calc(100vw-1.5rem)] right-0 shadow-xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 rounded-2xl text-stone-800 dark:text-stone-100"
               >
                 <div className="card-body p-4">
                   <div className="flex items-center justify-between border-b border-stone-100 dark:border-stone-800 pb-2">
@@ -220,12 +220,12 @@ function Header() {
                 <div
                   tabIndex={0}
                   role="button"
-                  className="btn btn-ghost h-10 min-h-10 px-3 flex items-center gap-2 rounded-full border border-stone-200/80 dark:border-stone-700 bg-white/70 dark:bg-stone-800/80 hover:bg-white dark:hover:bg-stone-800 text-stone-800 dark:text-stone-200 shadow-2xs cursor-pointer"
+                  className="btn btn-ghost h-9 sm:h-10 min-h-9 sm:min-h-10 px-2 sm:px-3 flex items-center gap-1.5 sm:gap-2 rounded-full border border-stone-200/80 dark:border-stone-700 bg-white/70 dark:bg-stone-800/80 hover:bg-white dark:hover:bg-stone-800 text-stone-800 dark:text-stone-200 shadow-2xs cursor-pointer"
                 >
                   <div className="w-6 h-6 rounded-full bg-green-600 text-white font-bold text-xs flex items-center justify-center">
                     {userInfo.name ? userInfo.name.charAt(0).toUpperCase() : 'U'}
                   </div>
-                  <span className="font-semibold text-sm max-w-28 truncate">{userInfo.name}</span>
+                  <span className="font-semibold text-xs sm:text-sm max-w-18 sm:max-w-28 truncate">{userInfo.name}</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-3.5 w-3.5 text-stone-500 dark:text-stone-400"
@@ -292,16 +292,16 @@ function Header() {
                 </ul>
               </div>
             ) : (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1 sm:gap-2">
                 <Link
                   to="/login"
-                  className="btn btn-sm btn-ghost text-stone-700 dark:text-stone-300 hover:text-green-700 dark:hover:text-green-400 hover:bg-stone-100/70 dark:hover:bg-stone-800 font-semibold px-3"
+                  className="btn btn-xs sm:btn-sm btn-ghost text-stone-700 dark:text-stone-300 hover:text-green-700 dark:hover:text-green-400 hover:bg-stone-100/70 dark:hover:bg-stone-800 font-semibold px-2.5 sm:px-3 rounded-full text-xs"
                 >
                   Sign In
                 </Link>
                 <Link
                   to="/register"
-                  className="btn btn-sm bg-green-600 hover:bg-green-700 text-white border-none rounded-full px-4 font-semibold shadow-xs"
+                  className="hidden sm:inline-flex btn btn-sm bg-green-600 hover:bg-green-700 text-white border-none rounded-full px-4 font-semibold shadow-xs text-xs"
                 >
                   Register
                 </Link>
@@ -328,66 +328,131 @@ function Header() {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-stone-200/80 dark:border-stone-800 bg-white dark:bg-stone-900 px-4 py-3 space-y-1">
+          <div className="md:hidden border-t border-stone-200/80 dark:border-stone-800 bg-white dark:bg-stone-900 px-4 py-3 space-y-1 shadow-lg animate-in slide-in-from-top-2 duration-200">
             <Link
               to="/"
               onClick={() => setMobileMenuOpen(false)}
-              className="block px-3 py-2 rounded-lg text-sm font-semibold text-stone-700 dark:text-stone-300 hover:bg-green-50 dark:hover:bg-stone-800 hover:text-green-700 dark:hover:text-green-400"
+              className="block px-3 py-2.5 rounded-xl text-sm font-semibold text-stone-700 dark:text-stone-300 hover:bg-green-50 dark:hover:bg-stone-800 hover:text-green-700 dark:hover:text-green-400 transition-colors"
             >
-              Home
+              🏠 Home
             </Link>
             <Link
               to="/shop"
               onClick={() => setMobileMenuOpen(false)}
-              className="block px-3 py-2 rounded-lg text-sm font-semibold text-stone-700 dark:text-stone-300 hover:bg-green-50 dark:hover:bg-stone-800 hover:text-green-700 dark:hover:text-green-400"
+              className="block px-3 py-2.5 rounded-xl text-sm font-semibold text-stone-700 dark:text-stone-300 hover:bg-green-50 dark:hover:bg-stone-800 hover:text-green-700 dark:hover:text-green-400 transition-colors"
             >
-              Shop All
+              🛍️ Shop All
             </Link>
             <Link
               to="/shop?category=Vegetables"
               onClick={() => setMobileMenuOpen(false)}
-              className="block px-3 py-2 rounded-lg text-sm font-semibold text-stone-700 dark:text-stone-300 hover:bg-green-50 dark:hover:bg-stone-800 hover:text-green-700 dark:hover:text-green-400"
+              className="block px-3 py-2 rounded-xl text-xs font-semibold text-stone-600 dark:text-stone-400 hover:bg-green-50 dark:hover:bg-stone-800 hover:text-green-700 dark:hover:text-green-400 pl-6 transition-colors"
             >
-              Vegetables
+              🥦 Fresh Vegetables
             </Link>
             <Link
               to="/shop?category=Fruits"
               onClick={() => setMobileMenuOpen(false)}
-              className="block px-3 py-2 rounded-lg text-sm font-semibold text-stone-700 dark:text-stone-300 hover:bg-green-50 dark:hover:bg-stone-800 hover:text-green-700 dark:hover:text-green-400"
+              className="block px-3 py-2 rounded-xl text-xs font-semibold text-stone-600 dark:text-stone-400 hover:bg-green-50 dark:hover:bg-stone-800 hover:text-green-700 dark:hover:text-green-400 pl-6 transition-colors"
             >
-              Fruits
+              🍎 Organic Fruits
             </Link>
+            <Link
+              to="/shop?category=Dairy"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block px-3 py-2 rounded-xl text-xs font-semibold text-stone-600 dark:text-stone-400 hover:bg-green-50 dark:hover:bg-stone-800 hover:text-green-700 dark:hover:text-green-400 pl-6 transition-colors"
+            >
+              🥛 Farm Dairy & Eggs
+            </Link>
+            <Link
+              to="/shop?category=Bread"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block px-3 py-2 rounded-xl text-xs font-semibold text-stone-600 dark:text-stone-400 hover:bg-green-50 dark:hover:bg-stone-800 hover:text-green-700 dark:hover:text-green-400 pl-6 transition-colors"
+            >
+              🥖 Artisan Bread
+            </Link>
+
             {userInfo && (userInfo.role === 'farm' || userInfo.brand) && (
               <Link
                 to="/farm/dashboard"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block px-3 py-2 rounded-lg text-sm font-bold text-green-800 dark:text-green-300 bg-green-50 dark:bg-green-950/40"
+                className="block px-3 py-2.5 rounded-xl text-sm font-bold text-green-800 dark:text-green-300 bg-green-50 dark:bg-green-950/40"
               >
-                🌾 Farm Dashboard
+                🌾 Farm Dashboard ({userInfo.brand || 'Partner'})
               </Link>
             )}
+
             {userInfo && userInfo.isAdmin && (
-              <>
+              <div className="pt-1 space-y-1">
                 <Link
                   to="/admin/productlist"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block px-3 py-2 rounded-lg text-sm font-bold text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/40"
+                  className="block px-3 py-2 rounded-xl text-xs font-bold text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/40"
                 >
-                  Admin Panel
+                  ⚡ Admin Product Management
+                </Link>
+                <Link
+                  to="/admin/orderlist"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3 py-2 rounded-xl text-xs font-bold text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/40"
+                >
+                  📦 Admin Order Management
                 </Link>
                 <Link
                   to="/admin/withdrawals"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block px-3 py-2 rounded-lg text-sm font-bold text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/40"
+                  className="block px-3 py-2 rounded-xl text-xs font-bold text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/40"
                 >
-                  Farm Payouts
+                  💵 Admin Farm Payouts
                 </Link>
-              </>
+              </div>
+            )}
+
+            {/* Auth options for mobile if logged out */}
+            {!userInfo && (
+              <div className="grid grid-cols-2 gap-2 pt-2 border-t border-stone-100 dark:border-stone-800">
+                <Link
+                  to="/login"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="btn btn-sm btn-ghost border border-stone-200 dark:border-stone-700 text-stone-700 dark:text-stone-300 rounded-xl font-bold text-xs"
+                >
+                  Sign In
+                </Link>
+                <Link
+                  to="/register"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="btn btn-sm bg-green-600 text-white border-none rounded-xl font-bold text-xs shadow-xs"
+                >
+                  Register
+                </Link>
+              </div>
+            )}
+
+            {/* User quick profile if logged in */}
+            {userInfo && (
+              <div className="pt-2 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between">
+                <Link
+                  to="/profile"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-xs font-bold text-stone-700 dark:text-stone-300 hover:text-green-700 flex items-center gap-1.5"
+                >
+                  <span>👤 My Account ({userInfo.name})</span>
+                </Link>
+                <button
+                  onClick={() => {
+                    logoutHandler();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="text-xs font-bold text-red-600 dark:text-red-400 hover:underline cursor-pointer"
+                >
+                  Logout
+                </button>
+              </div>
             )}
 
             {/* Mobile Theme Toggle Row */}
-            <div className="flex items-center justify-between px-3 py-2.5 border-t border-stone-100 dark:border-stone-800 mt-2 pt-2.5">
-              <span className="text-xs font-bold text-stone-500 dark:text-stone-400">Appearance</span>
+            <div className="flex items-center justify-between px-3 py-2 border-t border-stone-100 dark:border-stone-800 mt-2 pt-2">
+              <span className="text-xs font-bold text-stone-500 dark:text-stone-400">Appearance Theme</span>
               <ThemeToggle />
             </div>
           </div>

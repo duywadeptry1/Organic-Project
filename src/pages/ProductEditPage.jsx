@@ -187,7 +187,7 @@ function ProductEditPage() {
                   Product Image
                 </label>
                 
-                <div className="flex items-center gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                   {image ? (
                     <img 
                       src={image} 
@@ -200,7 +200,7 @@ function ProductEditPage() {
                     </div>
                   )}
 
-                  <div className="flex-1 space-y-2">
+                  <div className="flex-1 w-full space-y-2">
                     <input 
                       type="text" 
                       placeholder="Image URL (or upload below)" 

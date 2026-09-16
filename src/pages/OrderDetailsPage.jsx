@@ -139,7 +139,7 @@ const OrderDetailsPage = () => {
                 <span className="text-xs font-bold text-green-700 dark:text-green-400 uppercase tracking-widest bg-green-50 dark:bg-green-950/50 px-2.5 py-1 rounded-md border border-green-200/30 dark:border-green-800/40">
                   Receipt & Tracking
                 </span>
-                <h1 className="text-2xl sm:text-3xl font-black text-stone-900 dark:text-stone-50 tracking-tight mt-1.5">
+                <h1 className="text-xl sm:text-2xl md:text-3xl font-black text-stone-900 dark:text-stone-50 tracking-tight mt-1.5 break-all">
                   Order #{order._id}
                 </h1>
                 <p className="text-xs text-stone-500 dark:text-stone-400 mt-0.5">

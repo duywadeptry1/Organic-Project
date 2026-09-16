@@ -302,7 +302,7 @@ function ProductListPage() {
           </div>
         ) : (
           <div className="bg-white dark:bg-stone-900 rounded-3xl shadow-xs border border-stone-200/80 dark:border-stone-800 p-6 sm:p-7 overflow-x-auto transition-colors duration-200">
-            <table className="w-full text-left text-xs border-collapse">
+            <table className="w-full min-w-[700px] text-left text-xs border-collapse">
               <thead>
                 <tr className="border-b border-stone-100 dark:border-stone-800 text-stone-400 dark:text-stone-500 font-bold uppercase tracking-wider">
                   <th className="pb-3 pr-4">Product Info</th>
@@ -434,7 +434,7 @@ function ProductListPage() {
       {/* Bulk Generator Modal */}
       {showBulkModal && (
         <div className="fixed inset-0 z-50 bg-stone-900/60 dark:bg-black/80 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-stone-900 rounded-3xl shadow-2xl border border-stone-200 dark:border-stone-800 max-w-md w-full p-6 animate-scale-in">
+          <div className="bg-white dark:bg-stone-900 rounded-3xl shadow-2xl border border-stone-200 dark:border-stone-800 max-w-md w-full max-h-[90vh] overflow-y-auto p-6 animate-scale-in">
             <div className="flex items-center justify-between pb-3 mb-4 border-b border-stone-100 dark:border-stone-800">
               <div>
                 <h3 className="text-base font-black text-stone-900 dark:text-stone-100">⚡ Bulk Generate Test Products</h3>
@@ -521,7 +521,7 @@ function ProductListPage() {
       {/* Custom Single Item Create Modal */}
       {showCreateModal && (
         <div className="fixed inset-0 z-50 bg-stone-900/60 dark:bg-black/80 backdrop-blur-xs flex items-center justify-center p-4">
-          <form onSubmit={handleCustomCreate} className="bg-white dark:bg-stone-900 rounded-3xl shadow-2xl border border-stone-200 dark:border-stone-800 max-w-md w-full p-6 animate-scale-in">
+          <form onSubmit={handleCustomCreate} className="bg-white dark:bg-stone-900 rounded-3xl shadow-2xl border border-stone-200 dark:border-stone-800 max-w-md w-full max-h-[90vh] overflow-y-auto p-6 animate-scale-in">
             <div className="flex items-center justify-between pb-3 mb-4 border-b border-stone-100 dark:border-stone-800">
               <div>
                 <h3 className="text-base font-black text-stone-900 dark:text-stone-100">Add New Inventory Item</h3>

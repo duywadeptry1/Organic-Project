@@ -17,17 +17,17 @@ function CheckoutSteps({ step1, step2, step3, step4 }) {
               {s.active ? (
                 <Link
                   to={s.link}
-                  className="flex items-center justify-center w-8 h-8 rounded-full bg-green-600 text-white font-bold text-xs shadow-xs hover:bg-green-700 transition"
+                  className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-green-600 text-white font-bold text-[11px] sm:text-xs shadow-xs hover:bg-green-700 transition"
                 >
                   {s.num}
                 </Link>
               ) : (
-                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-stone-200 dark:bg-stone-800 text-stone-500 dark:text-stone-400 font-bold text-xs">
+                <div className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-stone-200 dark:bg-stone-800 text-stone-500 dark:text-stone-400 font-bold text-[11px] sm:text-xs">
                   {s.num}
                 </div>
               )}
               <span
-                className={`mt-1.5 text-xs font-semibold text-center ${
+                className={`mt-1.5 text-[10px] sm:text-xs font-semibold text-center tracking-tight truncate max-w-[72px] sm:max-w-none ${
                   s.active ? 'text-green-800 dark:text-green-400 font-bold' : 'text-stone-400 dark:text-stone-500'
                 }`}
               >

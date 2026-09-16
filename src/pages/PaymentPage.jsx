@@ -45,27 +45,27 @@ function PaymentPage() {
             
             {/* MoMo E-Wallet Option */}
             <label
-              className={`flex items-center p-4 rounded-2xl border-2 cursor-pointer transition-all ${
+              className={`flex flex-wrap sm:flex-nowrap items-center justify-between gap-3 p-4 rounded-2xl border-2 cursor-pointer transition-all ${
                 paymentMethod === 'MoMo'
                   ? 'border-[#D82D8B] bg-pink-50/50 dark:bg-pink-950/20 shadow-sm'
                   : 'border-stone-200 dark:border-stone-800 hover:border-stone-300 dark:hover:border-stone-700 bg-white dark:bg-stone-800/40'
               }`}
             >
-              <input
-                type="radio"
-                id="MoMo"
-                name="paymentMethod"
-                value="MoMo"
-                checked={paymentMethod === 'MoMo'}
-                onChange={(e) => setPaymentMethod(e.target.value)}
-                className="w-4 h-4 text-[#A50064] focus:ring-[#A50064] border-stone-300 dark:border-stone-600"
-              />
-              <div className="ml-3.5 flex items-center gap-3 flex-1">
+              <div className="flex items-center gap-3.5 flex-1 min-w-0">
+                <input
+                  type="radio"
+                  id="MoMo"
+                  name="paymentMethod"
+                  value="MoMo"
+                  checked={paymentMethod === 'MoMo'}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                  className="w-4 h-4 text-[#A50064] focus:ring-[#A50064] border-stone-300 dark:border-stone-600 shrink-0"
+                />
                 <div className="w-10 h-10 rounded-xl bg-[#A50064] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-xs">
                   <span className="tracking-tighter">momo</span>
                 </div>
-                <div>
-                  <div className="flex items-center gap-2">
+                <div className="min-w-0">
+                  <div className="flex flex-wrap items-center gap-2">
                     <span className="font-bold text-sm text-stone-900 dark:text-stone-100 block">
                       MoMo e-wallet / MoMo QR Code
                     </span>
@@ -73,12 +73,12 @@ function PaymentPage() {
                       Hot
                     </span>
                   </div>
-                  <span className="text-xs text-stone-500 dark:text-stone-400 block">
+                  <span className="text-xs text-stone-500 dark:text-stone-400 block mt-0.5">
                     Suitable for postpaid and prepaid MoMo users. Scan the QR code to pay directly from your MoMo app.
                   </span>
                 </div>
               </div>
-              <span className="text-xs font-bold bg-pink-100 dark:bg-pink-950/60 text-[#A50064] dark:text-pink-300 px-2 py-0.5 rounded">
+              <span className="text-[11px] font-bold bg-pink-100 dark:bg-pink-950/60 text-[#A50064] dark:text-pink-300 px-2.5 py-1 rounded-full whitespace-nowrap self-start sm:self-center ml-7 sm:ml-0">
                 Popular in Vietnam
               </span>
             </label>

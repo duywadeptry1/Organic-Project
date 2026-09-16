@@ -36,18 +36,18 @@ function ProductDetailPage() {
       <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
         
         {/* Breadcrumb Navigation */}
-        <nav className="flex items-center gap-2 text-xs font-semibold text-stone-500 dark:text-stone-400 mb-6">
-          <Link to="/" className="hover:text-green-700 dark:hover:text-green-400">Home</Link>
+        <nav className="flex items-center gap-2 text-xs font-semibold text-stone-500 dark:text-stone-400 mb-6 overflow-x-auto no-scrollbar py-1">
+          <Link to="/" className="hover:text-green-700 dark:text-green-400 shrink-0">Home</Link>
           <span>/</span>
-          <Link to="/shop" className="hover:text-green-700 dark:hover:text-green-400">Shop</Link>
+          <Link to="/shop" className="hover:text-green-700 dark:text-green-400 shrink-0">Shop</Link>
           {product && (
             <>
               <span>/</span>
-              <Link to={`/shop?category=${product.category}`} className="hover:text-green-700 dark:hover:text-green-400">
+              <Link to={`/shop?category=${product.category}`} className="hover:text-green-700 dark:text-green-400 shrink-0">
                 {product.category}
               </Link>
               <span>/</span>
-              <span className="text-stone-800 dark:text-stone-200 truncate max-w-xs">{product.name}</span>
+              <span className="text-stone-800 dark:text-stone-200 truncate max-w-[140px] sm:max-w-xs">{product.name}</span>
             </>
           )}
         </nav>
@@ -68,7 +68,7 @@ function ProductDetailPage() {
           <div className="space-y-8">
             
             {/* Main Product Panel */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 bg-white dark:bg-stone-900 p-6 sm:p-10 rounded-3xl shadow-xs border border-stone-200/80 dark:border-stone-800 transition-colors duration-200">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 bg-white dark:bg-stone-900 p-4 sm:p-8 md:p-10 rounded-3xl shadow-xs border border-stone-200/80 dark:border-stone-800 transition-colors duration-200">
               
               {/* Product Image */}
               <div className="relative rounded-2xl overflow-hidden bg-stone-50 dark:bg-stone-800/60 border border-stone-100 dark:border-stone-700/60 flex items-center justify-center p-4">
@@ -78,7 +78,7 @@ function ProductDetailPage() {
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-auto max-h-[420px] object-contain rounded-xl hover:scale-105 transition-transform duration-500"
+                  className="w-full h-auto max-h-[300px] sm:max-h-[420px] object-contain rounded-xl hover:scale-105 transition-transform duration-500"
                 />
               </div>
 
@@ -150,7 +150,7 @@ function ProductDetailPage() {
                             type="button"
                             onClick={() => setQty(Math.max(1, qty - 1))}
                             disabled={qty <= 1}
-                            className="w-8 h-8 rounded-lg bg-white dark:bg-stone-700 shadow-2xs text-stone-700 dark:text-stone-200 font-bold hover:bg-stone-100 dark:hover:bg-stone-600 disabled:opacity-40 flex items-center justify-center transition-colors"
+                            className="w-8 h-8 rounded-lg bg-white dark:bg-stone-700 shadow-2xs text-stone-700 dark:text-stone-200 font-bold hover:bg-stone-100 dark:hover:bg-stone-600 disabled:opacity-40 flex items-center justify-center transition-colors cursor-pointer"
                           >
                             -
                           </button>
@@ -159,7 +159,7 @@ function ProductDetailPage() {
                             type="button"
                             onClick={() => setQty(Math.min(stock, qty + 1))}
                             disabled={qty >= stock}
-                            className="w-8 h-8 rounded-lg bg-white dark:bg-stone-700 shadow-2xs text-stone-700 dark:text-stone-200 font-bold hover:bg-stone-100 dark:hover:bg-stone-600 disabled:opacity-40 flex items-center justify-center transition-colors"
+                            className="w-8 h-8 rounded-lg bg-white dark:bg-stone-700 shadow-2xs text-stone-700 dark:text-stone-200 font-bold hover:bg-stone-100 dark:hover:bg-stone-600 disabled:opacity-40 flex items-center justify-center transition-colors cursor-pointer"
                           >
                             +
                           </button>
@@ -181,7 +181,7 @@ function ProductDetailPage() {
                     <button
                       onClick={() => addToCartHandler(false)}
                       disabled={isOutOfStock}
-                      className="w-full bg-stone-900 hover:bg-stone-800 dark:bg-stone-800 dark:hover:bg-stone-700 text-white font-bold py-3.5 px-6 rounded-xl transition-all shadow-xs disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 border border-transparent dark:border-stone-700"
+                      className="w-full bg-stone-900 hover:bg-stone-800 dark:bg-stone-800 dark:hover:bg-stone-700 text-white font-bold py-3.5 px-6 rounded-xl transition-all shadow-xs disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 border border-transparent dark:border-stone-700 cursor-pointer"
                     >
                       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -191,7 +191,7 @@ function ProductDetailPage() {
                     <button
                       onClick={() => addToCartHandler(true)}
                       disabled={isOutOfStock}
-                      className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3.5 px-6 rounded-xl transition-all shadow-md hover:shadow-lg disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                      className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3.5 px-6 rounded-xl transition-all shadow-md hover:shadow-lg disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer"
                     >
                       Buy Now &rarr;
                     </button>
@@ -202,11 +202,11 @@ function ProductDetailPage() {
             </div>
 
             {/* Information Tabs */}
-            <div className="bg-white dark:bg-stone-900 p-6 sm:p-8 rounded-3xl shadow-xs border border-stone-200/80 dark:border-stone-800 transition-colors duration-200">
-              <div className="flex border-b border-stone-200 dark:border-stone-800 gap-6 text-sm font-bold">
+            <div className="bg-white dark:bg-stone-900 p-5 sm:p-8 rounded-3xl shadow-xs border border-stone-200/80 dark:border-stone-800 transition-colors duration-200">
+              <div className="flex border-b border-stone-200 dark:border-stone-800 gap-4 sm:gap-6 text-xs sm:text-sm font-bold overflow-x-auto no-scrollbar">
                 <button
                   onClick={() => setActiveTab('description')}
-                  className={`pb-3 transition-colors relative ${
+                  className={`pb-3 transition-colors relative shrink-0 cursor-pointer ${
                     activeTab === 'description'
                       ? 'text-green-700 dark:text-green-400 border-b-2 border-green-600 dark:border-green-500'
                       : 'text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200'
@@ -216,7 +216,7 @@ function ProductDetailPage() {
                 </button>
                 <button
                   onClick={() => setActiveTab('shipping')}
-                  className={`pb-3 transition-colors relative ${
+                  className={`pb-3 transition-colors relative shrink-0 cursor-pointer ${
                     activeTab === 'shipping'
                       ? 'text-green-700 dark:text-green-400 border-b-2 border-green-600 dark:border-green-500'
                       : 'text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200'

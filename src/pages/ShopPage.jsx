@@ -60,8 +60,8 @@ function ShopPage() {
 
         <div className="flex flex-col lg:flex-row gap-8 items-start">
 
-          {/* Sidebar Filters */}
-          <aside className="w-full lg:w-64 shrink-0">
+          {/* Desktop Sidebar Filters (Hidden on mobile) */}
+          <aside className="hidden lg:block w-64 shrink-0">
             <div className="bg-white dark:bg-stone-900 p-5 rounded-2xl shadow-xs border border-stone-200/80 dark:border-stone-800 sticky top-24">
               <h2 className="text-base font-bold text-stone-900 dark:text-stone-100 mb-3 pb-2 border-b border-stone-100 dark:border-stone-800 flex items-center justify-between">
                 <span>Categories</span>
@@ -74,7 +74,7 @@ function ShopPage() {
                 <li>
                   <button
                     onClick={() => handleCategoryChange('All')}
-                    className={`w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center justify-between ${
+                    className={`w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center justify-between cursor-pointer ${
                       activeCategory === 'All'
                         ? 'bg-green-600 text-white shadow-xs'
                         : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-stone-100'
@@ -91,7 +91,7 @@ function ShopPage() {
                   <li key={cat.id}>
                     <button
                       onClick={() => handleCategoryChange(cat.name)}
-                      className={`w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center justify-between ${
+                      className={`w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center justify-between cursor-pointer ${
                         activeCategory.toLowerCase() === cat.name.toLowerCase()
                           ? 'bg-green-600 text-white shadow-xs'
                           : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-stone-100'
@@ -117,11 +117,38 @@ function ShopPage() {
           {/* Main Product Area */}
           <main className="flex-1 w-full">
             
+            {/* Mobile Horizontal Category Pills (< lg) */}
+            <div className="lg:hidden flex items-center gap-2 overflow-x-auto no-scrollbar pb-2 mb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
+              <button
+                onClick={() => handleCategoryChange('All')}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all shrink-0 cursor-pointer ${
+                  activeCategory === 'All'
+                    ? 'bg-green-600 text-white shadow-xs'
+                    : 'bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 text-stone-700 dark:text-stone-300'
+                }`}
+              >
+                All Products
+              </button>
+              {categories.map((cat) => (
+                <button
+                  key={cat.id}
+                  onClick={() => handleCategoryChange(cat.name)}
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all shrink-0 cursor-pointer ${
+                    activeCategory.toLowerCase() === cat.name.toLowerCase()
+                      ? 'bg-green-600 text-white shadow-xs'
+                      : 'bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 text-stone-700 dark:text-stone-300'
+                  }`}
+                >
+                  {cat.name}
+                </button>
+              ))}
+            </div>
+
             {/* Search and Sort Toolbar */}
-            <div className="bg-white dark:bg-stone-900 p-4 rounded-2xl shadow-xs border border-stone-200/80 dark:border-stone-800 mb-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="bg-white dark:bg-stone-900 p-3.5 sm:p-4 rounded-2xl shadow-xs border border-stone-200/80 dark:border-stone-800 mb-6 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
               
               {/* Search input with clear button */}
-              <div className="relative w-full sm:w-80">
+              <div className="relative w-full sm:w-72 md:w-80">
                 <span className="absolute inset-y-0 left-3 flex items-center pointer-events-none text-stone-400">
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -135,7 +162,7 @@ function ShopPage() {
                     setSearchQuery(e.target.value);
                     setCurrentPage(1);
                   }}
-                  className="w-full pl-9 pr-8 py-2 text-sm bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-xl focus:bg-white dark:focus:bg-stone-850 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all text-stone-800 dark:text-stone-100"
+                  className="w-full pl-9 pr-8 py-2 text-xs sm:text-sm bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-xl focus:bg-white dark:focus:bg-stone-850 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all text-stone-800 dark:text-stone-100"
                 />
                 {searchQuery && (
                   <button
@@ -148,12 +175,12 @@ function ShopPage() {
               </div>
 
               {/* Sort dropdown */}
-              <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+              <div className="flex items-center justify-between sm:justify-end gap-2 w-full sm:w-auto">
                 <span className="text-xs font-semibold text-stone-500 dark:text-stone-400 shrink-0">Sort by:</span>
                 <select
                   value={sortOption}
                   onChange={(e) => setSortOption(e.target.value)}
-                  className="py-2 px-3 text-sm bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-xl focus:bg-white dark:focus:bg-stone-850 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 text-stone-800 dark:text-stone-100 font-medium cursor-pointer"
+                  className="py-1.5 sm:py-2 px-3 text-xs sm:text-sm bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-xl focus:bg-white dark:focus:bg-stone-850 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 text-stone-800 dark:text-stone-100 font-medium cursor-pointer"
                 >
                   <option value="newest">Newest Arrivals</option>
                   <option value="price_asc">Price: Low to High</option>

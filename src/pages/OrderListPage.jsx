@@ -34,7 +34,7 @@ function OrderListPage() {
           </div>
         ) : (
           <div className="bg-white dark:bg-stone-900 rounded-3xl shadow-xs border border-stone-200/80 dark:border-stone-800 p-6 sm:p-7 overflow-x-auto transition-colors duration-200">
-            <table className="w-full text-left text-xs border-collapse">
+            <table className="w-full min-w-[640px] text-left text-xs border-collapse">
               <thead>
                 <tr className="border-b border-stone-100 dark:border-stone-800 text-stone-400 dark:text-stone-500 font-bold uppercase tracking-wider">
                   <th className="pb-3 pr-3">Order ID</th>

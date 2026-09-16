@@ -331,29 +331,29 @@ function FarmDashboardPage() {
         </div>
 
         {/* Navigation Tabs */}
-        <div className="flex items-center gap-2 mb-6 border-b border-stone-200 dark:border-stone-800 pb-3">
+        <div className="flex items-center gap-2 mb-6 border-b border-stone-200 dark:border-stone-800 pb-3 overflow-x-auto no-scrollbar">
           <button
             type="button"
             onClick={() => setActiveTab('ledger')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 cursor-pointer ${
+            className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 whitespace-nowrap cursor-pointer ${
               activeTab === 'ledger'
                 ? 'bg-green-600 text-white shadow-xs'
                 : 'text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800'
             }`}
           >
-            <PackageCheck className="w-4 h-4" />
+            <PackageCheck className="w-4 h-4 shrink-0" />
             Delivered Produce Sales ({deliveredSales.length})
           </button>
           <button
             type="button"
             onClick={() => setActiveTab('withdrawals')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 cursor-pointer ${
+            className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 whitespace-nowrap cursor-pointer ${
               activeTab === 'withdrawals'
                 ? 'bg-green-600 text-white shadow-xs'
                 : 'text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800'
             }`}
           >
-            <DollarSign className="w-4 h-4" />
+            <DollarSign className="w-4 h-4 shrink-0" />
             Payout & Withdrawal History ({withdrawals.length})
           </button>
         </div>
@@ -387,7 +387,7 @@ function FarmDashboardPage() {
               </div>
             ) : (
               <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs border-collapse">
+                <table className="w-full min-w-[680px] text-left text-xs border-collapse">
                   <thead>
                     <tr className="border-b border-stone-100 dark:border-stone-800 text-stone-400 dark:text-stone-500 font-bold uppercase tracking-wider">
                       <th className="pb-3 pr-3">Product</th>
@@ -489,7 +489,7 @@ function FarmDashboardPage() {
               </div>
             ) : (
               <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs border-collapse">
+                <table className="w-full min-w-[720px] text-left text-xs border-collapse">
                   <thead>
                     <tr className="border-b border-stone-100 dark:border-stone-800 text-stone-400 dark:text-stone-500 font-bold uppercase tracking-wider">
                       <th className="pb-3 pr-3">Date Requested</th>
@@ -564,7 +564,7 @@ function FarmDashboardPage() {
       {/* Interactive Withdrawal Request Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/60 backdrop-blur-xs animate-in fade-in duration-200">
-          <div className="bg-white dark:bg-stone-900 rounded-3xl max-w-lg w-full p-6 sm:p-8 border border-stone-200 dark:border-stone-800 shadow-2xl relative">
+          <div className="bg-white dark:bg-stone-900 rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 border border-stone-200 dark:border-stone-800 shadow-2xl relative">
             
             <button
               type="button"

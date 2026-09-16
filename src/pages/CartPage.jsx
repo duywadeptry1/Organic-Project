@@ -101,75 +101,77 @@ function CartPage() {
                 {cartItems.map((item) => {
                   const stock = item.countInStock !== undefined ? item.countInStock : (item.stock ?? 20);
                   return (
-                    <div key={item._id} className="p-4 sm:p-6 flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+                    <div key={item._id} className="p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                       
-                      {/* Product Thumbnail */}
-                      <Link to={`/product/${item._id}`} className="shrink-0">
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-2xl bg-stone-50 dark:bg-stone-800 border border-stone-100 dark:border-stone-700"
-                        />
-                      </Link>
-
-                      {/* Info */}
-                      <div className="flex-1 min-w-0 text-center sm:text-left">
-                        <span className="text-[11px] font-bold text-green-700 dark:text-green-400 uppercase tracking-wider">
-                          {item.category || 'Organic'}
-                        </span>
-                        <Link
-                          to={`/product/${item._id}`}
-                          className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 hover:text-green-700 dark:hover:text-green-400 transition block truncate mt-0.5"
-                        >
-                          {item.name}
+                      {/* Top / Left: Thumbnail & Info */}
+                      <div className="flex items-center gap-3 sm:gap-4 w-full sm:w-auto flex-1 min-w-0">
+                        <Link to={`/product/${item._id}`} className="shrink-0">
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-2xl bg-stone-50 dark:bg-stone-800 border border-stone-100 dark:border-stone-700"
+                          />
                         </Link>
-                        <p className="text-stone-500 dark:text-stone-400 text-xs mt-0.5">
-                          Unit Price: <span className="font-semibold text-stone-800 dark:text-stone-200">${item.price.toFixed(2)}</span>
-                        </p>
+
+                        <div className="flex-1 min-w-0">
+                          <span className="text-[10px] sm:text-[11px] font-bold text-green-700 dark:text-green-400 uppercase tracking-wider">
+                            {item.category || 'Organic'}
+                          </span>
+                          <Link
+                            to={`/product/${item._id}`}
+                            className="text-sm sm:text-base font-bold text-stone-900 dark:text-stone-100 hover:text-green-700 dark:hover:text-green-400 transition block truncate mt-0.5"
+                          >
+                            {item.name}
+                          </Link>
+                          <p className="text-stone-500 dark:text-stone-400 text-xs mt-0.5">
+                            ${item.price.toFixed(2)} / unit
+                          </p>
+                        </div>
                       </div>
 
-                      {/* Quantity Stepper */}
-                      <div className="flex items-center gap-2">
+                      {/* Bottom (Mobile) / Right (Desktop): Stepper + Price + Remove */}
+                      <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-6 w-full sm:w-auto pt-3 sm:pt-0 border-t sm:border-t-0 border-stone-100 dark:border-stone-800">
+                        {/* Quantity Stepper */}
                         <div className="flex items-center border border-stone-200 dark:border-stone-700 rounded-xl bg-stone-50 dark:bg-stone-800 p-1">
                           <button
                             type="button"
                             onClick={() => updateQuantity(item, item.qty - 1)}
                             disabled={item.qty <= 1}
-                            className="w-7 h-7 rounded-lg bg-white dark:bg-stone-700 shadow-2xs text-stone-700 dark:text-stone-200 font-bold hover:bg-stone-100 dark:hover:bg-stone-600 disabled:opacity-30 flex items-center justify-center transition-colors"
+                            className="w-7 h-7 rounded-lg bg-white dark:bg-stone-700 shadow-2xs text-stone-700 dark:text-stone-200 font-bold hover:bg-stone-100 dark:hover:bg-stone-600 disabled:opacity-30 flex items-center justify-center transition-colors cursor-pointer"
                           >
                             -
                           </button>
-                          <span className="w-9 text-center font-bold text-stone-900 dark:text-stone-100 text-sm">
+                          <span className="w-8 text-center font-bold text-stone-900 dark:text-stone-100 text-xs sm:text-sm">
                             {item.qty}
                           </span>
                           <button
                             type="button"
                             onClick={() => updateQuantity(item, item.qty + 1)}
                             disabled={item.qty >= stock}
-                            className="w-7 h-7 rounded-lg bg-white dark:bg-stone-700 shadow-2xs text-stone-700 dark:text-stone-200 font-bold hover:bg-stone-100 dark:hover:bg-stone-600 disabled:opacity-30 flex items-center justify-center transition-colors"
+                            className="w-7 h-7 rounded-lg bg-white dark:bg-stone-700 shadow-2xs text-stone-700 dark:text-stone-200 font-bold hover:bg-stone-100 dark:hover:bg-stone-600 disabled:opacity-30 flex items-center justify-center transition-colors cursor-pointer"
                           >
                             +
                           </button>
                         </div>
-                      </div>
 
-                      {/* Total Item Price */}
-                      <div className="text-right min-w-20">
-                        <span className="text-base sm:text-lg font-black text-stone-900 dark:text-stone-100 block">
-                          ${(item.qty * item.price).toFixed(2)}
-                        </span>
-                      </div>
+                        {/* Total Item Price */}
+                        <div className="text-right min-w-16 sm:min-w-20">
+                          <span className="text-sm sm:text-base font-black text-stone-900 dark:text-stone-100 block">
+                            ${(item.qty * item.price).toFixed(2)}
+                          </span>
+                        </div>
 
-                      {/* Delete Action */}
-                      <button
-                        onClick={() => removeFromCartHandler(item._id)}
-                        className="p-2 text-stone-400 dark:text-stone-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 rounded-xl transition"
-                        title="Remove item"
-                      >
-                        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                        </svg>
-                      </button>
+                        {/* Delete Action */}
+                        <button
+                          onClick={() => removeFromCartHandler(item._id)}
+                          className="p-1.5 sm:p-2 text-stone-400 dark:text-stone-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 rounded-xl transition cursor-pointer"
+                          title="Remove item"
+                        >
+                          <svg className="h-4 sm:h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                          </svg>
+                        </button>
+                      </div>
 
                     </div>
                   );

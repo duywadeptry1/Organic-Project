@@ -22,10 +22,10 @@ function AdminLayout() {
             </span>
           </div>
 
-          <div className="flex items-center gap-2 text-xs font-semibold">
+          <div className="flex items-center gap-1.5 sm:gap-2 text-xs font-semibold overflow-x-auto no-scrollbar w-full sm:w-auto pb-1 sm:pb-0">
             <Link
               to="/admin/productlist"
-              className={`px-3 py-1.5 rounded-lg transition ${
+              className={`px-3 py-1.5 rounded-lg transition shrink-0 ${
                 isActive('/admin/productlist') || isActive('/admin')
                   ? 'bg-green-600 text-white font-bold'
                   : 'text-stone-300 hover:text-white hover:bg-stone-800'
@@ -35,7 +35,7 @@ function AdminLayout() {
             </Link>
             <Link
               to="/admin/orderlist"
-              className={`px-3 py-1.5 rounded-lg transition ${
+              className={`px-3 py-1.5 rounded-lg transition shrink-0 ${
                 isActive('/admin/orderlist')
                   ? 'bg-green-600 text-white font-bold'
                   : 'text-stone-300 hover:text-white hover:bg-stone-800'
@@ -45,7 +45,7 @@ function AdminLayout() {
             </Link>
             <Link
               to="/admin/withdrawals"
-              className={`px-3 py-1.5 rounded-lg transition ${
+              className={`px-3 py-1.5 rounded-lg transition shrink-0 ${
                 isActive('/admin/withdrawals')
                   ? 'bg-green-600 text-white font-bold'
                   : 'text-stone-300 hover:text-white hover:bg-stone-800'
@@ -55,13 +55,13 @@ function AdminLayout() {
             </Link>
             <Link
               to="/farm/dashboard"
-              className="px-3 py-1.5 rounded-lg text-emerald-400 hover:text-emerald-300 hover:bg-stone-800 transition font-medium"
+              className="px-3 py-1.5 rounded-lg text-emerald-400 hover:text-emerald-300 hover:bg-stone-800 transition font-medium shrink-0"
             >
               Farm Portal &rarr;
             </Link>
             <Link
               to="/shop"
-              className="px-3 py-1.5 rounded-lg text-stone-400 hover:text-white hover:bg-stone-800 transition"
+              className="px-3 py-1.5 rounded-lg text-stone-400 hover:text-white hover:bg-stone-800 transition shrink-0"
             >
               Live Store &rarr;
             </Link>

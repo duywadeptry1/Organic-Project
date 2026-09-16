@@ -20,7 +20,7 @@ function HomePage() {
   return (
     <div className="bg-[#FDFBF7] dark:bg-stone-950 min-h-screen">
       {/* Hero Section */}
-      <section className="relative min-h-[520px] md:min-h-[580px] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[460px] sm:min-h-[520px] md:min-h-[580px] flex items-center justify-center overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -30,26 +30,26 @@ function HomePage() {
         ></div>
         <div className="absolute inset-0 bg-stone-950/50 backdrop-brightness-90"></div>
 
-        <div className="relative z-10 text-center px-4 max-w-3xl mx-auto py-16">
-          <span className="inline-block bg-green-500/90 text-white font-bold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full mb-4 shadow-xs">
+        <div className="relative z-10 text-center px-4 max-w-3xl mx-auto py-12 sm:py-16">
+          <span className="inline-block bg-green-500/90 text-white font-bold text-[10px] sm:text-xs uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-3 sm:mb-4 shadow-xs">
             100% Certified Organic Harvest
           </span>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight mb-4 drop-shadow-md">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tight mb-3 sm:mb-4 drop-shadow-md">
             Fresh Organic Food
           </h1>
-          <p className="text-lg sm:text-xl text-stone-100 mb-8 max-w-xl mx-auto font-light leading-relaxed drop-shadow-xs">
+          <p className="text-base sm:text-lg md:text-xl text-stone-100 mb-6 sm:mb-8 max-w-xl mx-auto font-light leading-relaxed drop-shadow-xs">
             Directly from certified local organic farms straight to your family table.
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto">
             <Link
               to="/shop"
-              className="bg-green-600 hover:bg-green-700 text-white font-bold py-3.5 px-8 rounded-full transition-all text-base shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0"
+              className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-bold py-3 sm:py-3.5 px-6 sm:px-8 rounded-full transition-all text-sm sm:text-base shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 text-center"
             >
               Shop All Products
             </Link>
             <a
               href="#featured"
-              className="bg-white/90 dark:bg-stone-900/90 hover:bg-white dark:hover:bg-stone-900 text-stone-900 dark:text-stone-100 font-bold py-3.5 px-7 rounded-full transition-all text-base shadow-md hover:shadow-lg backdrop-blur-xs"
+              className="w-full sm:w-auto bg-white/90 dark:bg-stone-900/90 hover:bg-white dark:hover:bg-stone-900 text-stone-900 dark:text-stone-100 font-bold py-3 sm:py-3.5 px-6 sm:px-7 rounded-full transition-all text-sm sm:text-base shadow-md hover:shadow-lg backdrop-blur-xs text-center"
             >
               Explore Harvest
             </a>
@@ -58,9 +58,9 @@ function HomePage() {
       </section>
 
       {/* Value Proposition Strip */}
-      <section className="border-b border-stone-200/80 dark:border-stone-800 bg-white dark:bg-stone-900/80 py-8">
+      <section className="border-b border-stone-200/80 dark:border-stone-800 bg-white dark:bg-stone-900/80 py-6 sm:py-8">
         <div className="container mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center md:text-left">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 text-left">
             
             <div className="flex items-center gap-3.5 p-2 justify-center md:justify-start">
               <div className="w-12 h-12 rounded-2xl bg-green-100 dark:bg-green-950/60 text-green-700 dark:text-green-400 flex items-center justify-center shrink-0">
@@ -127,12 +127,12 @@ function HomePage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
             {categories.map((cat) => (
               <Link
                 key={cat.id}
                 to={`/shop?category=${cat.name}`}
-                className="group relative h-40 rounded-2xl overflow-hidden shadow-xs hover:shadow-lg transition-all"
+                className="group relative h-32 sm:h-40 rounded-2xl overflow-hidden shadow-xs hover:shadow-lg transition-all"
               >
                 <img
                   src={cat.image}
@@ -159,13 +159,13 @@ function HomePage() {
             <h2 className="text-3xl sm:text-4xl font-black text-stone-900 dark:text-stone-100 tracking-tight">Featured Products</h2>
             <div className="w-20 h-1 bg-green-500 mx-auto rounded-full mt-2 mb-6"></div>
             
-            {/* Category Filter Tabs */}
-            <div className="flex flex-wrap items-center justify-center gap-2">
+            {/* Category Filter Tabs with smooth mobile horizontal scroll */}
+            <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto no-scrollbar pb-1 max-w-full">
               {['All', 'Vegetables', 'Fruits', 'Dairy', 'Bread'].map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
+                  className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all shrink-0 cursor-pointer ${
                     selectedCategory === cat
                       ? 'bg-green-600 text-white shadow-xs'
                       : 'bg-stone-100 dark:bg-stone-800/80 text-stone-600 dark:text-stone-300 hover:bg-stone-200 dark:hover:bg-stone-700'
@@ -190,7 +190,7 @@ function HomePage() {
               No products found in this category.
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
               {filteredProducts.map((product) => (
                 <ProductCard key={product._id} product={product} />
               ))}
